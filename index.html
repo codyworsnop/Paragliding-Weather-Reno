@@ -22,6 +22,20 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+        <style>
+            #wrap { width: 600px; height: 390px; padding: 0; overflow: hidden; }
+            #frame { width: 800px; height: 520px; border: 1px solid black; }
+            #frame {
+                -ms-zoom: 0.75;
+                -moz-transform: scale(0.75);
+                -moz-transform-origin: 0 0;
+                -o-transform: scale(0.75);
+                -o-transform-origin: 0 0;
+                -webkit-transform: scale(0.75);
+                -webkit-transform-origin: 0 0;
+            }
+        </style>
 </head>
 
 <body>
@@ -31,7 +45,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="./">Home</a>
