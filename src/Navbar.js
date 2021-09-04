@@ -9,8 +9,7 @@ import {
   Link
 } from "react-router-dom";
 
-const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
+const { Sider } = Layout;
 
 const Navbar = () => {
   const [collapsed, setCollapsed] = useState(false)
