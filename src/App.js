@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Navbar from './Navbar';
 import Windy from './Windy'
-import Dashboard from './Dashboard'
+import Dashboard from './Dashboard/Dashboard'
 
 const { Content, Footer } = Layout;
 

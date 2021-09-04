@@ -21,7 +21,7 @@ const Navbar = () => {
   return (
     <>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}
-        breakpoint="sms" collapsedWidth="0">
+        breakpoint="sm" collapsedWidth="0">
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
           <Menu.Item key="1" icon={<PieChartOutlined />}>
             <Link to="/">
