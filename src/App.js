@@ -6,7 +6,6 @@ import {
     Route
 } from "react-router-dom";
 import { Provider } from 'react-redux';
-import promise from 'redux-promise-middleware'
 import Navbar from './Navbar/_components/Navbar';
 import Windy from './Windy/_components/Windy'
 import Dashboard from './Dashboard/_components/Dashboard'

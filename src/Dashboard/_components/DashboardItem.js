@@ -25,13 +25,10 @@ const DashboardItem = ({ title, link, test, reducerKey }) => {
     }))
 
     useEffect(() => {    
-
         if (test) { 
-
-            console.log("ASKED FOR DATA")
             dispatch(getScraperData(link, reducerKey))
         }
-    }, [])
+    }, [test, link, reducerKey])
 
     return (
         <StyledCard title={title} extra={<a href={link}>More</a>}>
