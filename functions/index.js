@@ -1,9 +1,5 @@
 const functions = require("firebase-functions");
-
-const cors = require('cors')({ origin: true });
-const cheerio = require('cheerio');
-const getUrls = require('get-urls');
-const fetch = require('node-fetch');
+const cors = require('cors')({origin: true});
 const puppeteer = require('puppeteer')
 
 const collect = async (url) => {
@@ -11,7 +7,6 @@ const collect = async (url) => {
     const page = await browser.newPage();
     
     await page.goto(url);
-    await page.screenshot({path: '1.png'})
     await page.waitForSelector('pre')
 
     // Execute code in the DOM
@@ -27,10 +22,7 @@ const collect = async (url) => {
 
 exports.scraper = functions.https.onRequest( async (request, response) => {
     cors(request, response, async () => {
-
-        console.log(request.body.url)
         const data = await collect(request.body.url);
-
         response.send(data)
 
     });
