@@ -20,7 +20,10 @@ const collect = async (url) => {
     return data;
 }
 
-exports.scraper = functions.https.onRequest( async (request, response) => {
+exports.scraper = functions.runWith({
+    timeoutSeconds: 60,
+    memory: "1GB"
+}).https.onRequest( async (request, response) => {
     cors(request, response, async () => {
         const data = await collect(request.body.url);
         response.send(data)
