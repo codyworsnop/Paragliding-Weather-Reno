@@ -28,7 +28,7 @@ const DashboardItem = ({ title, link, test, reducerKey }) => {
         if (test) { 
             dispatch(getScraperData(link, reducerKey))
         }
-    }, [test, link, reducerKey])
+    }, [test, link, reducerKey, dispatch])
 
     return (
         <StyledCard title={title} extra={<a href={link}>More</a>}>
