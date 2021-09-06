@@ -12,7 +12,10 @@ const launchAndWait = async (url, tag) => {
 
     return page
 }
-exports.scrapePreformattedText = functions.https.onRequest( async (request, response) => {
+exports.scrapePreformattedText = functions.runWith({
+    timeoutSeconds: 60,
+    memory: "512MB"
+}).https.onRequest( async (request, response) => {
     cors(request, response, async () => {
 
         const url = request.body.url
@@ -67,7 +70,6 @@ exports.scrapeSoundings = functions.https.onRequest(async (request, response) =>
         await page.click("input[type=radio][value=RAOB]")
         await page.click("input[type=submit][value=\"Interactive plot\"]")
         await page.waitFor(1000)
-        await page.screenshot({path: "1.png"})
 
         await browser.close()
     })

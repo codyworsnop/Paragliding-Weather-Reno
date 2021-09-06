@@ -8,7 +8,7 @@ export const PARAGLIDE_ENDPOINT_TEST = 'http://localhost:5001/paraglidingweather
 export const GET_SCRAPER_DATA = 'GET_SCRAPER_DATA'
 
 export const getScraperData = createAction(GET_SCRAPER_DATA, async (url, reducerKey ) =>
-    await axios.post(PARAGLIDE_ENDPOINT, { "url": url })
+    await axios.post(PARAGLIDE_ENDPOINT_TEST, { "url": url })
         .then(resp => ({ key: reducerKey, data: resp.data }))
         .catch(err => {
             message.error(err.toString())
