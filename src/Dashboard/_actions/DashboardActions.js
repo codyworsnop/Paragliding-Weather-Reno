@@ -2,8 +2,8 @@ import { createAction } from "redux-actions"
 import axios from "axios";
 import { message } from "antd";
 
-export const PARAGLIDE_ENDPOINT = 'https://us-central1-paraglidingweatherreno.cloudfunctions.net/scraper'
-export const PARAGLIDE_ENDPOINT_TEST = 'http://localhost:5001/paraglidingweatherreno/us-central1/scraper'
+export const PARAGLIDE_ENDPOINT = 'https://us-central1-paraglidingweatherreno.cloudfunctions.net/scrapePreformattedText'
+export const PARAGLIDE_ENDPOINT_TEST = 'http://localhost:5001/paraglidingweatherreno/us-central1/scrapePreformattedText'
 
 export const GET_SCRAPER_DATA = 'GET_SCRAPER_DATA'
 

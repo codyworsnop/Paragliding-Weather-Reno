@@ -16,7 +16,12 @@ exports.scrapePreformattedText = functions.https.onRequest( async (request, resp
     cors(request, response, async () => {
 
         const url = request.body.url
-        const page = launchAndWait(url, "pre")
+        
+        const browser = await puppeteer.launch({ headless: true })
+        const page = await browser.newPage();
+    
+        await page.goto(url)
+        await page.waitForSelector("pre")
     
         // Execute code in the DOM
         const data = await page.evaluate(() => {
