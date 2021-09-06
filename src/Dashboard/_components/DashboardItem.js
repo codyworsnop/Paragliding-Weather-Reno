@@ -17,23 +17,26 @@ const StyledSpinner = styled(Spin)`
     justify-content: center;
 `;
 
-const DashboardItem = ({ title, link, test, reducerKey }) => {
+const DashboardItem = ({ title, link, dynamic, reducerKey, content }) => {
+
     const dispatch = useDispatch()
     const { loading, data } = useSelector(({ dashboardReducer }) => ({
         loading: dashboardReducer[reducerKey]?.loading,
         data: dashboardReducer[reducerKey]?.data
     }))
 
-    useEffect(() => {    
-        if (test) { 
+    useEffect(() => {
+        if (dynamic) {
             dispatch(getScraperData(link, reducerKey))
         }
-    }, [test, link, reducerKey, dispatch])
+    }, [dynamic, link, reducerKey, dispatch])
 
     return (
         <StyledCard title={title} extra={<a href={link}>More</a>}>
-            <StyledSpinner spinning={loading}>
-                {data}
+            <StyledSpinner spinning={dynamic ? loading : false}>
+                <pre>
+                    {dynamic ? data : content}
+                </pre>
             </StyledSpinner>
         </StyledCard>
     )
@@ -42,11 +45,13 @@ const DashboardItem = ({ title, link, test, reducerKey }) => {
 DashboardItem.propTypes = {
     title: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
-    reducerKey: PropTypes.string.isRequired
+    reducerKey: PropTypes.string.isRequired,
+    content: PropTypes.object
 };
 
-DashboardItem.defaultProps = { 
-    test: false 
+DashboardItem.defaultProps = {
+    dynamic: false,
+    content: <></>
 }
 
 export default DashboardItem

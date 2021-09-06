@@ -8,8 +8,10 @@ import {
 import { Provider } from 'react-redux';
 import Navbar from './Navbar/_components/Navbar';
 import Windy from './Windy/_components/Windy'
+import Rasp from './Rasp/_components/Rasp';
 import Dashboard from './Dashboard/_components/Dashboard'
 import configureStore from './store';
+import WindObservations from './WindObservations/_components/WindObservations';
 
 const { Content, Footer } = Layout;
 
@@ -24,13 +26,12 @@ const App = () => {
                     <Layout className="site-layout">
                         <Content>
                             <Switch>
-                                <Route exact path="/windy" component={Windy} />
                                 <Route exact path="/" component={Dashboard} />
+                                <Route exact path="/windy" component={Windy} />
+                                <Route exact path="/rasp" component={Rasp} />
+                                <Route exact path="/windObservations" component={WindObservations} />
                             </Switch>
                         </Content>
-                        <Footer style={{ textAlign: 'center' }}>
-                            <p>Cody Worsnop ©2021</p>
-                        </Footer>
                     </Layout>
                 </Layout>
             </Router>
