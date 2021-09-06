@@ -1,49 +1,30 @@
 const functions = require("firebase-functions");
-const cors = require('cors')({origin: true});
+const cors = require('cors')({ origin: true });
 const puppeteer = require('puppeteer')
+const cheerio = require('cheerio');
+const fetch = require('node-fetch');
 
-const launchAndWait = async (url, tag) => { 
-
-    const browser = await puppeteer.launch({ headless: true })
-    const page = await browser.newPage();
-
-    await page.goto(url)
-    await page.waitForSelector(tag)
-
-    return page
-}
-exports.scrapePreformattedText = functions.runWith({
-    timeoutSeconds: 60,
-    memory: "512MB"
-}).https.onRequest( async (request, response) => {
+exports.scrapePreformattedText = functions.https.onRequest(async (request, response) => {
     cors(request, response, async () => {
 
         const url = request.body.url
-        
-        const browser = await puppeteer.launch({ headless: true })
-        const page = await browser.newPage();
-    
-        await page.goto(url)
-        await page.waitForSelector("pre")
-    
-        // Execute code in the DOM
-        const data = await page.evaluate(() => {
-            const content = document.querySelector("pre").innerText
-            return content
-        });
-      
-        await browser.close();
+        const res = await fetch(url);
+
+        const html = await res.text();
+        const $ = cheerio.load(html);
+        const data = $(`pre`).text() 
+
         response.send(data)
     });
 });
 
-exports.scrapeTable = functions.https.onRequest(async (request, response) => { 
-    cors(request, response, async () => { 
-        
+exports.scrapeTable = functions.https.onRequest(async (request, response) => {
+    cors(request, response, async () => {
+
         const url = request.body.url
         const browser = await puppeteer.launch({ headless: true })
         const page = await browser.newPage();
-    
+
         await page.goto(url)
         await page.waitForSelector("table")
 
@@ -58,9 +39,9 @@ exports.scrapeTable = functions.https.onRequest(async (request, response) => {
     })
 });
 
-exports.scrapeSoundings = functions.https.onRequest(async (request, response) => { 
-    cors(request, response, async () => { 
-        
+exports.scrapeSoundings = functions.https.onRequest(async (request, response) => {
+    cors(request, response, async () => {
+
         const url = request.body.url
         const browser = await puppeteer.launch({ headless: true })
         const page = await browser.newPage();

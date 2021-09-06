@@ -34,7 +34,7 @@ const DashboardItem = ({ title, link, dynamic, reducerKey, content }) => {
     return (
         <StyledCard title={title} extra={<a href={link}>More</a>}>
             <StyledSpinner spinning={dynamic ? loading : false}>
-                <pre>
+                <pre style={{ fontSize: "0.7vmax"}}>
                     {dynamic ? data : content}
                 </pre>
             </StyledSpinner>
