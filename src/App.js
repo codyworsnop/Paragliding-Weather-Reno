@@ -13,7 +13,7 @@ import Dashboard from './Dashboard/_components/Dashboard'
 import configureStore from './store';
 import WindObservations from './WindObservations/_components/WindObservations';
 
-const { Content, Footer } = Layout;
+const { Content } = Layout;
 
 const App = () => {
     const store = configureStore()

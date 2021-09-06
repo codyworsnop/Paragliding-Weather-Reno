@@ -26,7 +26,7 @@ const Dashboard = () => {
             </Col>
 
             <Col xs={24} sm={12}>
-                <DashboardItem title="Slide weather" link="https://wrcc.dri.edu/weather/slide.html" content={<img src="https://wrcc.dri.edu/cgi-bin/g2sage.pl?slid"/>}/>
+                <DashboardItem title="Slide weather" link="https://wrcc.dri.edu/weather/slide.html" content={<img src="https://wrcc.dri.edu/cgi-bin/g2sage.pl?slid" alt=""/>}/>
             </Col>
                         <Col xs={24} sm={12}>
                 <DashboardItem 
