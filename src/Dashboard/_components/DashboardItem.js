@@ -39,12 +39,12 @@ const DashboardItem = ({ title, dynamic, content, link, dynamicConfig }) => {
         if (dynamic) {
             dispatch(getScraperData(dynamicConfig.link, dynamicConfig.reducerKey, dynamicConfig.tag))
         }
-    }, [dynamicConfig, dispatch])
+    }, [dynamicConfig, dispatch, dynamic])
 
     return (
         <StyledCard title={title} extra={<a href={link}>More</a>}>
             <StyledSpinner spinning={dynamic ? loading : false}>
-                <pre style={{ fontSize: "0.7vmax"}}>
+                <pre style={{ fontSize: "0.8vmax"}}>
                     {dynamic ? data : content}
                 </pre>
             </StyledSpinner>
