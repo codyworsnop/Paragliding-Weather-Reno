@@ -47,7 +47,7 @@ const Dashboard = () => {
             <Col xs={24} sm={12}>
                 <DashboardItem
                     title="Soundings"
-                    link="https://rucsoundings.noaa.gov/"
+                    link="https://www.spc.noaa.gov/exper/soundings/"
                     content={<>
                     <FitImage src={GetSoundingsDateLink()} alt=""/>
                     <br></br>
