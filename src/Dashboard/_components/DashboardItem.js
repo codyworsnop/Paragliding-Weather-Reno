@@ -17,19 +17,29 @@ const StyledSpinner = styled(Spin)`
     justify-content: center;
 `;
 
-const DashboardItem = ({ title, link, dynamic, reducerKey, content }) => {
+const DashboardItem = ({ title, dynamic, content, link, dynamicConfig }) => {
 
     const dispatch = useDispatch()
-    const { loading, data } = useSelector(({ dashboardReducer }) => ({
-        loading: dashboardReducer[reducerKey]?.loading,
-        data: dashboardReducer[reducerKey]?.data
-    }))
+    
+    const { loading, data } = useSelector(({ dashboardReducer }) => {
+        if (dynamic) {
+            return {
+                loading: dashboardReducer[dynamicConfig.reducerKey]?.loading,
+                data: dashboardReducer[dynamicConfig.reducerKey]?.data
+            }
+        } else {
+            return {
+                loading: false,
+                data: null
+            }
+        }
+    })
 
     useEffect(() => {
         if (dynamic) {
-            dispatch(getScraperData(link, reducerKey))
+            dispatch(getScraperData(dynamicConfig.link, dynamicConfig.reducerKey, dynamicConfig.tag))
         }
-    }, [dynamic, link, reducerKey, dispatch])
+    }, [dynamicConfig, dispatch])
 
     return (
         <StyledCard title={title} extra={<a href={link}>More</a>}>
@@ -45,13 +55,14 @@ const DashboardItem = ({ title, link, dynamic, reducerKey, content }) => {
 DashboardItem.propTypes = {
     title: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
-    reducerKey: PropTypes.string.isRequired,
-    content: PropTypes.object
+    content: PropTypes.any,
+    dynamicConfig: PropTypes.object
 };
 
 DashboardItem.defaultProps = {
     dynamic: false,
-    content: <></>
+    content: "Not available. Please see more.",
+    dynamicConfig: null
 }
 
 export default DashboardItem

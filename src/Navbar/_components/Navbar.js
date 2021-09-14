@@ -10,8 +10,17 @@ import {
 import {
   Link
 } from "react-router-dom";
+import styled from 'styled-components';
 
 const { Sider } = Layout;
+const StyledSider = styled(Sider)`
+  overflow: visible;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 999;
+`;
 
 const Navbar = () => {
   const [collapsed, setCollapsed] = useState(false)
@@ -21,9 +30,8 @@ const Navbar = () => {
   }
 
   return (
-    <>
-      <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}
-        breakpoint="sm" collapsedWidth="0">
+      <StyledSider collapsible collapsed={collapsed} onCollapse={onCollapse}
+        breakpoint="sm" collapsedWidth="0" >
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
           <Menu.Item key="1" icon={<DashboardOutlined />}>
             <Link to="/">
@@ -51,8 +59,7 @@ const Navbar = () => {
             </Link>
           </Menu.Item>
         </Menu>
-      </Sider>
-    </>
+      </StyledSider>
   );
 };
 export default Navbar
