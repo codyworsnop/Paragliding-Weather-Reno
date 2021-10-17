@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
-import { Layout, Menu } from 'antd';
+import { Button, Layout, Menu } from 'antd';
 import {
   FireOutlined,
   DashboardOutlined,
   CloudOutlined,
   VideoCameraOutlined,
-  RadarChartOutlined
+  RadarChartOutlined,
+  BookOutlined,
+  LoginOutlined
 } from '@ant-design/icons';
 import {
   Link
 } from "react-router-dom";
 import styled from 'styled-components';
+import { auth } from '../../firebase'
+import Login from '../../Login/_components/Login';
 
 const { Sider } = Layout;
 const StyledSider = styled(Sider)`
@@ -24,6 +28,7 @@ const StyledSider = styled(Sider)`
 
 const Navbar = () => {
   const [collapsed, setCollapsed] = useState(false)
+  const [loginModalVisible, setLoginModalVisible] = useState(false)
 
   const onCollapse = () => {
     setCollapsed(!collapsed)
@@ -57,6 +62,19 @@ const Navbar = () => {
           <Link to="/webcams">
             Webcams
             </Link>
+          </Menu.Item>
+          <Menu.Item key="6" icon={<BookOutlined />}>
+          <Link to="/blog">
+            Blog
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="7" icon={<LoginOutlined />} style={{ position: 'absolute', bottom: 0 }}>
+            <Button onClick={() => {
+              setLoginModalVisible(true)
+            }}>
+              Login
+              {loginModalVisible && <Login visible={loginModalVisible} setVisible={setLoginModalVisible} />}
+            </Button>
           </Menu.Item>
         </Menu>
       </StyledSider>

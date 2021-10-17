@@ -4,10 +4,13 @@ import App from './App';
 import "antd/dist/antd.css";
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App/>
+      <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
