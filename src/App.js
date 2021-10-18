@@ -12,6 +12,7 @@ import Rasp from './Rasp/_components/Rasp';
 import Dashboard from './Dashboard/_components/Dashboard'
 import configureStore from './store';
 import WindObservations from './WindObservations/_components/WindObservations';
+import Blog from './Blog/_components/Blog';
 
 const { Content } = Layout;
 
@@ -30,6 +31,7 @@ const App = () => {
                                 <Route exact path="/windy" component={Windy} />
                                 <Route exact path="/rasp" component={Rasp} />
                                 <Route exact path="/windObservations" component={WindObservations} />
+                                <Route exact path="/blog" component={Blog} />
                             </Switch>
                         </Content>
                     </Layout>
