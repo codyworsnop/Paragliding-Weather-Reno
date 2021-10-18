@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Row, Col, Form, Input, Button } from 'antd'
 import styled from 'styled-components'
 import PropTypes from 'prop-types';
-import { registerWithEmailAndPassword, signInWithEmail, signInWithGoogle } from '../../firebase'
+import { registerWithEmailAndPassword, signInWithEmail, signInWithGoogle, sendPasswordResetEmailHelper } from '../../firebase'
 import { Stack } from '@bedrock-layout/stack';
 import googleLogo from '../../images/google_signin.png'
 
@@ -115,10 +115,16 @@ const AuthenticationModal = ({ visible, setVisible }) => {
             <Row style={{ textAlign: 'center' }} style={{ marginTop: '20px' }}>
                 <Col span={24}>
                     <Centered>
-                        {useLogin ? <Greyed>Not a member yet? <a onClick={() => {
-                            setUseLogin(false)
-                            form.resetFields()
-                        }}>Sign Up</a></Greyed> : <Greyed>Already a member? <a onClick={() => setUseLogin(true)}>Sign In</a></Greyed>}
+                        <Stack>
+                        {useLogin ?
+                            <Greyed>Not a member yet? <a onClick={() => {
+                                setUseLogin(false)
+                                form.resetFields()
+                            }}>Sign Up</a></Greyed> : <Greyed>Already a member? <a onClick={() => setUseLogin(true)}>Sign In</a></Greyed>}
+                        {useLogin && (
+                                <Greyed>Forgot password? <a onClick={() => sendPasswordResetEmailHelper(form.getFieldValue('email'))}>Click Here</a></Greyed>
+                        )}
+                        </Stack>
                     </Centered>
                 </Col>
             </Row>
