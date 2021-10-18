@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth'
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 import { message } from 'antd'
 
@@ -25,56 +25,25 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider()
 
-export const signInWithEmailAndPassword = async (email, password) => {
-    try {
-        await auth.signInWithEmailAndPassword(email, password);
-    } catch (err) {
-        console.error(err);
-        alert(err.message);
-    }
+export const signInWithEmail = async (email, password) => {
+    await signInWithEmailAndPassword(auth, email, password);
 };
 
 export const signInWithGoogle = async () => {
     try {
-        const res = await auth.signInWithPopup(googleProvider);
-        const user = res.user;
-        const query = await db
-            .collection("users")
-            .where("uid", "==", user.uid)
-            .get();
-        if (query.docs.length === 0) {
-            await db.collection("users").add({
-                uid: user.uid,
-                name: user.displayName,
-                authProvider: "google",
-                email: user.email,
-            });
-        }
-    } catch (err) {
-        console.error(err);
-        message.error(err.message);
+        const result = await signInWithPopup(auth, googleProvider)
+    } catch (error) {
+        message.error("Error occurred logging in: " + error)
     }
 };
 
-export const registerWithEmailAndPassword = async (name, email, password) => {
-    try {
-        const res = await auth.createUserWithEmailAndPassword(email, password);
-        const user = res.user;
-        await db.collection("users").add({
-            uid: user.uid,
-            name,
-            authProvider: "local",
-            email,
-        });
-    } catch (err) {
-        console.error(err);
-        message.error(err.message);
-    }
+export const registerWithEmailAndPassword = async (email, password) => {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
 };
 
-export const sendPasswordResetEmail = async (email) => {
+export const sendPasswordResetEmailHelper = async (email) => {
     try {
-        await auth.sendPasswordResetEmail(email);
+        await sendPasswordResetEmail(auth, email);
         message.success("Password reset link sent!");
     } catch (err) {
         console.error(err);
