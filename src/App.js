@@ -22,7 +22,7 @@ const App = () => {
     return (
         <Provider store={store}>
             <Router>
-                <Layout style={{ minHeight: '100vh' }}>
+                <Layout style={{ minHeight: '100vh', overflowX: 'hidden' }}>
                     <Navbar />
                     <Layout className="site-layout">
                         <Content>
