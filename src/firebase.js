@@ -31,14 +31,14 @@ export const signInWithEmail = async (email, password) => {
 
 export const signInWithGoogle = async () => {
     try {
-        const result = await signInWithPopup(auth, googleProvider)
+        await signInWithPopup(auth, googleProvider)
     } catch (error) {
         message.error("Error occurred logging in: " + error)
     }
 };
 
 export const registerWithEmailAndPassword = async (email, password) => {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
+    await createUserWithEmailAndPassword(auth, email, password);
 };
 
 export const sendPasswordResetEmailHelper = async (email) => {

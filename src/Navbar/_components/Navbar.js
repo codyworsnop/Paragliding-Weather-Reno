@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Layout, Menu } from 'antd';
 import {
   FireOutlined,
   DashboardOutlined,
   CloudOutlined,
-  VideoCameraOutlined,
   RadarChartOutlined,
-  BookOutlined,
   LoginOutlined,
-  PlusOutlined
 } from '@ant-design/icons';
 import {
   Link
 } from "react-router-dom";
 import styled from 'styled-components';
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth, logout, signInWithGoogle } from '../../firebase'
+import { auth, logout } from '../../firebase'
 import AuthenticationModal from '../../Login/_components/AuthenticationModal';
 
 const { Sider } = Layout;
@@ -37,7 +34,7 @@ const StyledMenu = styled(Menu)`
 const Navbar = () => {
   const [collapsed, setCollapsed] = useState(false)
   const [authModalVisible, setAuthModalVisible] = useState(false)
-  const [user, loading, error] = useAuthState(auth)
+  const [user] = useAuthState(auth) //[user, loading, error]
 
   const onCollapse = () => {
     setCollapsed(!collapsed)

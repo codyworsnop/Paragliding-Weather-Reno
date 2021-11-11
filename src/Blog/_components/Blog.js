@@ -1,11 +1,5 @@
 import React from 'react';
-import { message, Spin } from 'antd';
-import PropTypes from 'prop-types';
 import styled from 'styled-components'
-
-const StyledSpinner = styled(Spin)`
-    justify-content: center;
-`;
 
 const Centered = styled.div`
     display: flex;
@@ -14,7 +8,6 @@ const Centered = styled.div`
 `;
 
 const Blog = () => {
-
 
     return (
         <Centered>

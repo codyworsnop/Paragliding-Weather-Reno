@@ -103,24 +103,24 @@ const AuthenticationModal = ({ visible, setVisible }) => {
                         <Greyed>or sign in with:</Greyed>
                         <Centered>
                             <LoginButton ghost onClick={loginGoogle}>
-                                <img src={googleLogo} style={{ width: '100%', height: '100%' }} />
+                                <img src={googleLogo} style={{ width: '100%', height: '100%' }} alt='' />
                             </LoginButton>
                         </Centered>
                         <BottomBorder />
                     </Stack>
                 </Col>
             </Row>}
-            <Row style={{ textAlign: 'center' }} style={{ marginTop: '20px' }}>
+            <Row style={{ textAlign: 'center', marginTop: '20px' }}>
                 <Col span={24}>
                     <Centered>
                         <Stack gutter='sm'>
                         {useLogin ?
-                            <Greyed>Not a member yet? <a onClick={() => {
+                            <Greyed>Not a member yet? <a href='/' onClick={() => {
                                 setUseLogin(false)
                                 form.resetFields()
-                            }}>Sign Up</a></Greyed> : <Greyed>Already a member? <a onClick={() => setUseLogin(true)}>Sign In</a></Greyed>}
+                            }}>Sign Up</a></Greyed> : <Greyed>Already a member? <a href='/' onClick={() => setUseLogin(true)}>Sign In</a></Greyed>}
                         {useLogin && (
-                                <Greyed>Forgot password? <a onClick={() => sendPasswordResetEmailHelper(form.getFieldValue('email'))}>Click Here</a></Greyed>
+                                <Greyed>Forgot password? <a href='/' onClick={() => sendPasswordResetEmailHelper(form.getFieldValue('email'))}>Click Here</a></Greyed>
                         )}
                         </Stack>
                     </Centered>
