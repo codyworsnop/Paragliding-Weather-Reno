@@ -30,9 +30,7 @@ const BottomBorder = styled.div`
 `;
 
 const AuthenticationModal = ({ visible, setVisible }) => {
-
     const [useLogin, setUseLogin] = useState(true)
-
     const [errorState, setErrorState] = useState('')
     const [form] = Form.useForm();
 
@@ -115,7 +113,7 @@ const AuthenticationModal = ({ visible, setVisible }) => {
             <Row style={{ textAlign: 'center' }} style={{ marginTop: '20px' }}>
                 <Col span={24}>
                     <Centered>
-                        <Stack>
+                        <Stack gutter='sm'>
                         {useLogin ?
                             <Greyed>Not a member yet? <a onClick={() => {
                                 setUseLogin(false)

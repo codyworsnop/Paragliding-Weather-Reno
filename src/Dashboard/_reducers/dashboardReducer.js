@@ -6,21 +6,16 @@ const initialState = {}
 export const dashboardReducer = typeToReducer({
     [GET_SCRAPER_DATA]: { 
         PENDING: (state, action) => {
-            console.log("PENDING")
             return {
                 ...state,
             }
         },
         REJECTED: (state, action) => {
-            console.log("REJECTED")
-
             return { 
-
                 ...state,
             }
         },
         FULFILLED: (state, action) => {
-
             let update = { 
                 ...state,
             }

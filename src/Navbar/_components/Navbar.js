@@ -51,12 +51,6 @@ const Navbar = () => {
     }
   }
 
-  useEffect(() => {
-    console.log("AUTH STATE")
-    console.log(user)
-    console.log(loading)
-  }, [user, loading])
-
   return (
     <StyledSider collapsible collapsed={collapsed} onCollapse={onCollapse}
       breakpoint="sm" collapsedWidth="0" >
@@ -81,16 +75,16 @@ const Navbar = () => {
             Wind Observations
           </Link>
         </Menu.Item>
-        <Menu.Item key="5" icon={<VideoCameraOutlined />}>
+        {/* <Menu.Item key="5" icon={<VideoCameraOutlined />}>
           <Link to="/webcams">
             Webcams
           </Link>
-        </Menu.Item>
-        <Menu.Item key="6" icon={<BookOutlined />}>
+        </Menu.Item> */}
+        {/* <Menu.Item key="6" icon={<BookOutlined />}>
           <Link to="/blog">
             Blog
           </Link>
-        </Menu.Item>
+        </Menu.Item> */}
         {/* {user && <Menu.Item key="7" icon={<PlusOutlined />} style={{ position: 'absolute', bottom: 40 }}>
           Add Content
         </Menu.Item>} */}

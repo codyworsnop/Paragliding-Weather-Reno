@@ -54,6 +54,11 @@ const Dashboard = () => {
                     See additional <a href="https://rucsoundings.noaa.gov/">interactive soundings here</a>
                     </>}/>
             </Col>
+            <Col xs={24} sm={12}>
+                <DashboardItem title="Peavine Peak" link="https://www.wrh.noaa.gov/rev/remotedata/newpvpn2.php" content={<FitImage src="https://www.wrh.noaa.gov/images/rev/remote/pvpn2W.png" alt="" />} />
+            </Col>
+
+            {/* https://www.wrh.noaa.gov/images/rev/remote/pvpn2T.png */}
             {/* <Col xs={24} sm={12}>
                 <DashboardItem
                     title="More Soundings"
@@ -66,12 +71,12 @@ const Dashboard = () => {
                     link="https://www.wunderground.com/weather/us/nv/reno/KNVRENO457?utm_source=HomeCard&utm_content=Button&cm_ven=HomeCardButton"
                     content="Currently not available. Please use more link." />
             </Col> */}
-            <Col xs={24} sm={12}>
+            {/* <Col xs={24} sm={12}>
                 <DashboardItem
                     title="Spooner Summit Conditions"
                     link="https://www.wrh.noaa.gov/mesowest/timeseries.php?sid=SPRNV&num=72&banner=NONE"
                     content="Currently not available. Please use more link." />
-            </Col>
+            </Col> */}
         </Container>
     )
 }
