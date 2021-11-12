@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
+import { getAnalytics } from "firebase/analytics";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 import { message } from 'antd'
@@ -23,6 +24,7 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+export const analytics = getAnalytics(app);
 const googleProvider = new GoogleAuthProvider()
 
 export const signInWithEmail = async (email, password) => {

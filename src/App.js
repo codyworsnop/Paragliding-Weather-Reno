@@ -13,6 +13,7 @@ import Dashboard from './Dashboard/_components/Dashboard'
 import configureStore from './store';
 import WindObservations from './WindObservations/_components/WindObservations';
 import Blog from './Blog/_components/Blog';
+import Analytics from './Analytics';
 
 const { Content } = Layout;
 
@@ -22,6 +23,7 @@ const App = () => {
     return (
         <Provider store={store}>
             <Router>
+                <Analytics/>
                 <Layout style={{ minHeight: '100vh' }}>
                     <Navbar />
                     <Layout className="site-layout">
