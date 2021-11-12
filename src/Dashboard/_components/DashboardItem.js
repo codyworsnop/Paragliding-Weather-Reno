@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Card, Spin, Button } from 'antd'
+import { Card, Spin } from 'antd'
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux';
