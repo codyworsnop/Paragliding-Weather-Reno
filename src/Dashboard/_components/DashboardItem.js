@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Card, Spin } from 'antd'
+import { Card, Spin, Button } from 'antd'
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux';
@@ -17,10 +17,14 @@ const StyledSpinner = styled(Spin)`
     justify-content: center;
 `;
 
+const ContentWrapper = styled.div`
+    cursor: pointer;
+`;
+
 const DashboardItem = ({ title, dynamic, content, link, dynamicConfig }) => {
 
     const dispatch = useDispatch()
-    
+
     const { loading, data } = useSelector(({ dashboardReducer }) => {
         if (dynamic) {
             return {
@@ -41,13 +45,19 @@ const DashboardItem = ({ title, dynamic, content, link, dynamicConfig }) => {
         }
     }, [dynamicConfig, dispatch, dynamic])
 
+    const openAsNewPage = () => {
+        window.open(link, '_blank').focus();
+    }
+
     return (
         <StyledCard title={title} extra={<a href={link}>More</a>}>
-            <StyledSpinner spinning={dynamic ? loading : false}>
-                <pre style={{ fontSize: "0.8vmax"}}>
-                    {dynamic ? data : content}
-                </pre>
-            </StyledSpinner>
+            <ContentWrapper onClick={openAsNewPage}>
+                <StyledSpinner spinning={dynamic ? loading : false}>
+                    <pre style={{ fontSize: "0.8vmax" }}>
+                        {dynamic ? data : content}
+                    </pre>
+                </StyledSpinner>
+            </ContentWrapper>
         </StyledCard>
     )
 }
