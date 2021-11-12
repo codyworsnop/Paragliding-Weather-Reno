@@ -13,11 +13,9 @@ const Analytics = () => {
     };
     
     useEffect(() => {
-        console.log("PAGE VIEW: " + window.location.pathname)
         logCurrentPage(); // log the first page visit
         history.listen(() => {
             logCurrentPage();
-            console.log("CHANGE PAGE: " + window.location.pathname)
         });
     }, [history]);
     return (<></>);
