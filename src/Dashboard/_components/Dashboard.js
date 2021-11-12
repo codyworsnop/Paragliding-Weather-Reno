@@ -51,7 +51,7 @@ const Dashboard = () => {
                     content={<>
                     <FitImage src={GetSoundingsDateLink()} alt=""/>
                     <br></br>
-                    <p style={{ fontSize: '2em' }}>See additional <a href="https://rucsoundings.noaa.gov/">interactive soundings here</a></p>
+                    <p style={{ fontSize: '1.25em' }}>See additional <a href="https://rucsoundings.noaa.gov/">interactive soundings here</a></p>
                     </>}/>
             </Col>
             <Col xs={24} sm={12}>
