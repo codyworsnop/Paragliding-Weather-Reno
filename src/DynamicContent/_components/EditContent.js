@@ -7,7 +7,7 @@ const Centered = styled.div`
     align-items: center;
 `;
 
-const Blog = () => {
+const EditContent = () => {
 
     return (
         <Centered>
@@ -16,4 +16,4 @@ const Blog = () => {
     )
 }
 
-export default Blog
+export default EditContent

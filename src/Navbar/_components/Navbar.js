@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Layout, Menu } from 'antd';
 import {
   FireOutlined,
@@ -6,14 +6,15 @@ import {
   CloudOutlined,
   RadarChartOutlined,
   LoginOutlined,
+  PlusOutlined,
 } from '@ant-design/icons';
 import {
   Link
 } from "react-router-dom";
 import styled from 'styled-components';
-import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth, logout } from '../../firebase'
+import { logout } from '../../firebase'
 import AuthenticationModal from '../../Login/_components/AuthenticationModal';
+import { useSelector } from 'react-redux';
 
 const { Sider } = Layout;
 const StyledSider = styled(Sider)`
@@ -34,7 +35,10 @@ const StyledMenu = styled(Menu)`
 const Navbar = () => {
   const [collapsed, setCollapsed] = useState(false)
   const [authModalVisible, setAuthModalVisible] = useState(false)
-  const [user] = useAuthState(auth) //[user, loading, error]
+  const { user, role } = useSelector(({ authReducer }) => ({
+    user: authReducer.user,
+    role: authReducer.role
+  }))
 
   const onCollapse = () => {
     setCollapsed(!collapsed)
@@ -82,9 +86,11 @@ const Navbar = () => {
             Blog
           </Link>
         </Menu.Item> */}
-        {/* {user && <Menu.Item key="7" icon={<PlusOutlined />} style={{ position: 'absolute', bottom: 40 }}>
+        {role?.admin && <Menu.Item key="7" icon={<PlusOutlined />} style={{ position: 'absolute', bottom: 40 }}>
+        <Link to="/edit">
           Add Content
-        </Menu.Item>} */}
+          </Link>
+        </Menu.Item>}
         <Menu.Item key="8" disabled icon={<LoginOutlined />} style={{ position: 'absolute', bottom: 0 }}>
           <Button ghost onClick={handleLoginLogout}>
             {user ? <p>Sign out</p> : <p>Sign in</p>}

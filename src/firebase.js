@@ -27,6 +27,10 @@ export const db = getFirestore(app);
 export const analytics = getAnalytics(app);
 const googleProvider = new GoogleAuthProvider()
 
+export const getRoles = () => {
+    
+}
+
 export const signInWithEmail = async (email, password) => {
     await signInWithEmailAndPassword(auth, email, password);
 };
