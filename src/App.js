@@ -14,8 +14,10 @@ import configureStore from './store';
 import WindObservations from './WindObservations/_components/WindObservations';
 import Analytics from './Analytics';
 import Authentication from './Core/_components/Authentication';
-import EditContent from './DynamicContent/_components/EditContent';
+import ManageContent from './DynamicContent/_components/ManageContent';
 import { Footer } from 'antd/lib/layout/layout';
+import AddContent from './DynamicContent/_components/AddContent';
+import AdminRoute from './Core/_components/AdminRoute';
 
 const { Content } = Layout;
 
@@ -36,7 +38,8 @@ const App = () => {
                                 <Route exact path="/windy" component={Windy} />
                                 <Route exact path="/rasp" component={Rasp} />
                                 <Route exact path="/windObservations" component={WindObservations} />
-                                <Route exact path="/edit" component={EditContent} />
+                                <AdminRoute exact path="/edit" component={ManageContent} />
+                                <AdminRoute exact path="/add" component={AddContent} />
                             </Switch>
                         </Content>
                         <Footer style={{ backgroundColor: '#001528', color: 'white' }}>

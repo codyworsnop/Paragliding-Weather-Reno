@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Layout, Menu } from 'antd';
 import {
   FireOutlined,
@@ -14,7 +14,8 @@ import {
 import styled from 'styled-components';
 import { logout } from '../../firebase'
 import AuthenticationModal from '../../Login/_components/AuthenticationModal';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logOut } from '../../Core/_actions/authActions';
 
 const { Sider } = Layout;
 const StyledSider = styled(Sider)`
@@ -33,6 +34,7 @@ const StyledMenu = styled(Menu)`
 `;
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(false)
   const [authModalVisible, setAuthModalVisible] = useState(false)
   const { user, role } = useSelector(({ authReducer }) => ({
@@ -47,6 +49,7 @@ const Navbar = () => {
   const handleLoginLogout = () => {
     if (user) {
       logout()
+      dispatch(logOut())
     } else {
       setAuthModalVisible(true)
     }

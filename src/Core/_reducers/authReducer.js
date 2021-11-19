@@ -1,28 +1,32 @@
 import typeToReducer from 'type-to-reducer'
-import { SET_USER_CLAIMS } from '../_actions/authActions'
+import { LOG_OUT, SET_USER_CLAIMS } from '../_actions/authActions'
 import { SET_USER } from '../_actions/authActions'
 
 const initialState = {
     user: undefined, 
-    role: undefined
+    role: undefined,
 }
 
 export const authReducer = typeToReducer({
     [SET_USER] (state, action) { 
         return {
             ...state,
-            user: action.payload
+            user: action.payload,
+            loading: true,
         }
+    },
+    [LOG_OUT] (state, action) {
+        return initialState
     },
     [SET_USER_CLAIMS]: {
         PENDING: (state, action) => {
             return {
-                ...state
+                ...state,
             }
         },
         REJECTED: (state, action) => {            
             return {
-                ...state
+                ...state,
             }
         },
         FULFILLED: (state, action) => {

@@ -4,6 +4,7 @@ import { getIdTokenResult } from "@firebase/auth";
 
 export const SET_USER_CLAIMS = 'SET_USER_CLAIMS'
 export const SET_USER = 'SET_USER'
+export const LOG_OUT = 'LOG_OUT';
 
 export const setUser = createAction(SET_USER, user => user)
 
@@ -13,3 +14,5 @@ export const setUserClaims = createAction(SET_USER_CLAIMS, async user =>
         return Promise.reject(err);
     })
 );
+
+export const logOut = createAction(LOG_OUT, action => action);
