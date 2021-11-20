@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ReactMarkdown from 'react-markdown';
 import MdEditor from 'react-markdown-editor-lite'
 
-//editor will act as input only so no need to set value
 const MarkdownEditor = ({ value, onChange, ...props }) => { 
 
     const onEditorChange = (change) => {
@@ -12,7 +11,8 @@ const MarkdownEditor = ({ value, onChange, ...props }) => {
     return (
         <MdEditor {...props}
         renderHTML={text => <ReactMarkdown>{text}</ReactMarkdown>} 
-        onChange={onEditorChange}/>
+        onChange={onEditorChange}
+        value={value}/>
     )
 }
 

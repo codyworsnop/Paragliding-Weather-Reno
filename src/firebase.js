@@ -28,24 +28,6 @@ export const analytics = getAnalytics(app);
 
 const googleProvider = new GoogleAuthProvider()
 
-export const firestoreWriteJson = async (data) => {
-
-    try {
-        const docRef = await addDoc(collection(db, "pages"), data);
-        console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-        console.error("Error adding document: ", e);
-    }
-}
-
-export const firestoreRead = async () => {
-    const querySnapshot = await getDocs(collection(db, "pages"));
-    querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
-        console.log(doc.data())
-    });
-}
-
 export const signInWithEmail = async (email, password) => {
     await signInWithEmailAndPassword(auth, email, password);
 };

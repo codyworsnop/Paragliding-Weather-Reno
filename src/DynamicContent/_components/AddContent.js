@@ -1,44 +1,46 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import 'react-markdown-editor-lite/lib/index.css';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Spin } from 'antd';
 import MarkdownEditor from './MarkdownEditor';
-import { firestoreRead, firestoreWriteJson } from '../../firebase';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { firestoreWriteJson } from '../../Core/_actions/FirebaseActions';
 
 const Wrapper = styled.div`
     margin: 40px;
 `;
 
 const AddContent = () => {
-
-    const { user, role, loading } = useSelector(({ authReducer }) => ({
+    const [form] = Form.useForm()
+    const dispath = useDispatch()
+    const { user, loading } = useSelector(({ authReducer, contentReducer }) => ({
         user: authReducer.user,
-        role: authReducer.role
+        role: authReducer.role,
+        loading: contentReducer.loading,
     }))
 
     const onFinish = (values) => {
-        
         const request = {
             ...values,
-            identity: user?.displayName,
+            author: user?.displayName,
             createdDate: Date.now(),
             updateDate: null,
             enabled: true,
         }
 
-        firestoreWriteJson(request)
-        firestoreRead()
-    };
-
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+        dispath(firestoreWriteJson(request)).then(() => {
+            form.resetFields()
+        });
     };
 
     return (
         <Wrapper>
-            <Form onFinish={onFinish} onFinishFailed={onFinishFailed} layout='vertical'>
+            <Spin spinning={loading}>
+            <Form form={form} onFinish={onFinish} layout='vertical'>
                 <Form.Item label="Page Title" name="title" rules={[{ required: true }]}>
+                    <Input />
+                </Form.Item>
+                <Form.Item label="Page Path (Must be unique!)" name="pathname" rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
                 <Form.Item label="Content" name="content" >
@@ -50,6 +52,7 @@ const AddContent = () => {
                     </Button>
                 </Form.Item>
             </Form>
+            </Spin>
         </Wrapper>
     );
 };

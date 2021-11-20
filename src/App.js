@@ -12,12 +12,13 @@ import Rasp from './Rasp/_components/Rasp';
 import Dashboard from './Dashboard/_components/Dashboard'
 import configureStore from './store';
 import WindObservations from './WindObservations/_components/WindObservations';
-import Analytics from './Analytics';
+import Analytics from './Core/_components/Analytics';
 import Authentication from './Core/_components/Authentication';
 import ManageContent from './DynamicContent/_components/ManageContent';
 import { Footer } from 'antd/lib/layout/layout';
 import AddContent from './DynamicContent/_components/AddContent';
 import AdminRoute from './Core/_components/AdminRoute';
+import DynamicRoutes from './Core/_components/DynamicRoutes';
 
 const { Content } = Layout;
 
@@ -40,6 +41,7 @@ const App = () => {
                                 <Route exact path="/windObservations" component={WindObservations} />
                                 <AdminRoute exact path="/manage" component={ManageContent} />
                                 <AdminRoute exact path="/add" component={AddContent} />
+                                <DynamicRoutes />
                             </Switch>
                         </Content>
                         <Footer style={{ backgroundColor: '#001528', color: 'white' }}>

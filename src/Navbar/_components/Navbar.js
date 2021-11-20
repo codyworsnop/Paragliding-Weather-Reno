@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Layout, Menu } from 'antd';
 import {
   FireOutlined,
@@ -7,6 +7,7 @@ import {
   RadarChartOutlined,
   LoginOutlined,
   PlusOutlined,
+  SettingOutlined,
 } from '@ant-design/icons';
 import {
   Link
@@ -16,6 +17,7 @@ import { logout } from '../../firebase'
 import AuthenticationModal from '../../Login/_components/AuthenticationModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../Core/_actions/authActions';
+import { firestoreReadJson } from '../../Core/_actions/FirebaseActions';
 
 const { Sider } = Layout;
 const StyledSider = styled(Sider)`
@@ -37,10 +39,16 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(false)
   const [authModalVisible, setAuthModalVisible] = useState(false)
-  const { user, role } = useSelector(({ authReducer }) => ({
+  const { user, role, pages } = useSelector(({ authReducer, contentReducer }) => ({
     user: authReducer.user,
-    role: authReducer.role
+    role: authReducer.role,
+    pages: contentReducer.pages,
+    loading: contentReducer.loading,
   }))
+
+  useEffect(() => {
+      dispatch(firestoreReadJson())
+  }, [])
 
   const onCollapse = () => {
     setCollapsed(!collapsed)
@@ -84,14 +92,18 @@ const Navbar = () => {
             Webcams
           </Link>
         </Menu.Item> */}
-        {/* <Menu.Item key="6" icon={<BookOutlined />}>
-          <Link to="/blog">
-            Blog
-          </Link>
-        </Menu.Item> */}
-        {role?.admin && <Menu.Item key="7" icon={<PlusOutlined />} style={{ position: 'absolute', bottom: 40 }}>
+
+        {/* Dynamic Content */}
+        {pages?.map(page =>
+          <Menu.Item key={page.title}>
+            <Link to={`/${page.title}`}>
+            {page.title}
+            </Link>
+          </Menu.Item>)}
+
+        {role?.admin && <Menu.Item key="7" icon={<SettingOutlined />} style={{ position: 'absolute', bottom: 40 }}>
         <Link to="/manage">
-          Add Content
+          Manage Content
           </Link>
         </Menu.Item>}
         <Menu.Item key="8" disabled icon={<LoginOutlined />} style={{ position: 'absolute', bottom: 0 }}>
