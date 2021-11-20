@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledContainer = styled.div`
@@ -15,5 +16,9 @@ const DynamicContentContainer = ({ content }) => {
         </StyledContainer>
     )
 }
+
+DynamicContentContainer.propTypes = {
+    content: PropTypes.string.isRequired,
+};
 
 export default DynamicContentContainer

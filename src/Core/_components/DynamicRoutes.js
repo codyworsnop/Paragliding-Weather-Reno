@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Route } from 'react-router'
+import { Redirect, Route } from 'react-router'
 import DynamicContentContainer from '../../DynamicContent/_components/DynamicContentContainer'
 
 const DynamicRoutes = () => {
@@ -11,10 +11,10 @@ const DynamicRoutes = () => {
 
     return (
         <>
-            {pages?.map(page =>
+            {pages?.map(page => page.enabled ? 
                 <Route exact path={`/${page.pathname}`} >
                     <DynamicContentContainer content={page.content} />
-                </Route>
+                </Route> : <Redirect to="/" />
             )}
         </>
     )

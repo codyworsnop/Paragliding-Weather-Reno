@@ -42,7 +42,13 @@ const Dashboard = () => {
             </Col>
 
             <Col xs={24} sm={12}>
-                <DashboardItem title="Slide Peak" link="https://wrcc.dri.edu/weather/slide.html" content={<FitImage src="https://wrcc.dri.edu/cgi-bin/g2sage.pl?slid" alt="" />} />
+                <DashboardItem title="Slide Peak" link="https://www.wrh.noaa.gov/rev/remotedata/" content={<FitImage src="https://www.wrh.noaa.gov/images/rev/remote/slideW.png" alt="" />} />
+            </Col>
+            <Col xs={24} sm={12}>
+                <DashboardItem title="Peavine Peak" link="https://www.wrh.noaa.gov/rev/remotedata/" content={<FitImage src="https://www.wrh.noaa.gov/images/rev/remote/pvpn2W.png" alt="" />} />
+            </Col>
+            <Col xs={24} sm={12}>
+                <DashboardItem title="Virginia Peak" link="https://www.wrh.noaa.gov/rev/remotedata/" content={<FitImage src="https://www.wrh.noaa.gov/images/rev/remote/rgxW.png" alt="" />} />
             </Col>
             <Col xs={24} sm={12}>
                 <DashboardItem
@@ -51,11 +57,8 @@ const Dashboard = () => {
                     content={<>
                     <FitImage src={GetSoundingsDateLink()} alt=""/>
                     <br></br>
-                    <p style={{ fontSize: '1.25em' }}>See additional <a href="https://rucsoundings.noaa.gov/">interactive soundings here</a></p>
+                    <p style={{ fontSize: '1.5em' }}>See additional <a href="https://rucsoundings.noaa.gov/">Interactive RUC Soundings here</a></p>
                     </>}/>
-            </Col>
-            <Col xs={24} sm={12}>
-                <DashboardItem title="Peavine Peak" link="https://www.wrh.noaa.gov/rev/remotedata/newpvpn2.php" content={<FitImage src="https://www.wrh.noaa.gov/images/rev/remote/pvpn2W.png" alt="" />} />
             </Col>
             {/* https://www.wrh.noaa.gov/images/rev/remote/pvpn2T.png */}
             {/* <Col xs={24} sm={12}>

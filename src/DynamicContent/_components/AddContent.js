@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import 'react-markdown-editor-lite/lib/index.css';
-import { Button, Form, Input, Spin } from 'antd';
+import { Button, Checkbox, Form, Input, Spin } from 'antd';
 import MarkdownEditor from './MarkdownEditor';
 import { useDispatch, useSelector } from 'react-redux';
-import { firestoreWriteJson } from '../../Core/_actions/FirebaseActions';
+import { firestoreUpdate, firestoreWriteJson } from '../../Core/_actions/FirebaseActions';
+import { Split } from '@bedrock-layout/split';
+import { useHistory, useLocation } from 'react-router';
 
 const Wrapper = styled.div`
     margin: 40px;
@@ -12,7 +14,13 @@ const Wrapper = styled.div`
 
 const AddContent = () => {
     const [form] = Form.useForm()
-    const dispath = useDispatch()
+    const dispatch = useDispatch()
+    const history = useHistory();
+    const location = useLocation();
+
+    const data = location.state?.data
+    const edit = location.state?.edit 
+
     const { user, loading } = useSelector(({ authReducer, contentReducer }) => ({
         user: authReducer.user,
         role: authReducer.role,
@@ -25,33 +33,45 @@ const AddContent = () => {
             author: user?.displayName,
             createdDate: Date.now(),
             updateDate: null,
-            enabled: true,
         }
 
-        dispath(firestoreWriteJson(request)).then(() => {
-            form.resetFields()
-        });
+        if (edit) { 
+            dispatch(firestoreUpdate({ ...request, id: data.id })).then(() => {
+                form.resetFields();
+                history.push('/manage')
+            })
+        } else {
+            dispatch(firestoreWriteJson(request)).then(() => {
+                form.resetFields();
+                history.push('/manage')
+            });
+        }
     };
 
     return (
         <Wrapper>
             <Spin spinning={loading}>
-            <Form form={form} onFinish={onFinish} layout='vertical'>
-                <Form.Item label="Page Title" name="title" rules={[{ required: true }]}>
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Page Path (Must be unique!)" name="pathname" rules={[{ required: true }]}>
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Content" name="content" >
-                    <MarkdownEditor style={{ height: '500px', width: '100%' }}  />
+                <Form form={form} onFinish={onFinish} layout='vertical'>
+                    <Split gutter='lg'>
+                        <Form.Item label="Page Title" name="title" rules={[{ required: true }]} initialValue={edit ? data.title : ''}>
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="Page Path (Must be unique)" name="pathname" rules={[{ required: true }]} initialValue={edit ? data.pathname : ''}>
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="Enabled" name="enabled" valuePropName="checked" initialValue={edit ? data.enabled : true}>
+                            <Checkbox />
+                        </Form.Item>
+                    </Split>
+                    <Form.Item label="Content" name="content" initialValue={edit ? data.content : ''}>
+                        <MarkdownEditor style={{ height: '500px', width: '100%' }} />
                     </Form.Item>
-                <Form.Item>
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
-            </Form>
+                    <Form.Item>
+                        <Button type="primary" htmlType="submit">
+                            Submit
+                        </Button>
+                    </Form.Item>
+                </Form>
             </Spin>
         </Wrapper>
     );

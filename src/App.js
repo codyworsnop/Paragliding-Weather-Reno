@@ -19,6 +19,7 @@ import { Footer } from 'antd/lib/layout/layout';
 import AddContent from './DynamicContent/_components/AddContent';
 import AdminRoute from './Core/_components/AdminRoute';
 import DynamicRoutes from './Core/_components/DynamicRoutes';
+import Webcams from './Webcams/_components/Webcams';
 
 const { Content } = Layout;
 
@@ -39,12 +40,13 @@ const App = () => {
                                 <Route exact path="/windy" component={Windy} />
                                 <Route exact path="/rasp" component={Rasp} />
                                 <Route exact path="/windObservations" component={WindObservations} />
+                                <Route exact path="/webcams" component={Webcams} />
                                 <AdminRoute exact path="/manage" component={ManageContent} />
                                 <AdminRoute exact path="/add" component={AddContent} />
                                 <DynamicRoutes />
                             </Switch>
                         </Content>
-                        <Footer style={{ backgroundColor: '#001528', color: 'white' }}>
+                        <Footer style={{ backgroundColor: '#001528', color: 'white', fontSize: '0.8em' }}>
                         Feedback? Contact <a href="mailto:jworsnop1@gmail.com?subject=ParaglidingWeatherReno.com Feedback">Jeff Worsnop</a>. 
                         <br></br>
                         <br></br>

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Layout, Menu } from 'antd';
+import { Button, Divider, Layout, Menu } from 'antd';
 import {
   FireOutlined,
   DashboardOutlined,
   CloudOutlined,
   RadarChartOutlined,
   LoginOutlined,
-  PlusOutlined,
   SettingOutlined,
+  VideoCameraOutlined
 } from '@ant-design/icons';
 import {
   Link
@@ -47,7 +47,7 @@ const Navbar = () => {
   }))
 
   useEffect(() => {
-      dispatch(firestoreReadJson())
+    dispatch(firestoreReadJson())
   }, [])
 
   const onCollapse = () => {
@@ -87,30 +87,30 @@ const Navbar = () => {
             Wind Observations
           </Link>
         </Menu.Item>
-        {/* <Menu.Item key="5" icon={<VideoCameraOutlined />}>
+        <Menu.Item key="5" icon={<VideoCameraOutlined />}>
           <Link to="/webcams">
             Webcams
           </Link>
-        </Menu.Item> */}
+        </Menu.Item>
 
         {/* Dynamic Content */}
-        {pages?.map(page =>
+        {pages?.map(page => page.enabled &&
           <Menu.Item key={page.title}>
             <Link to={`/${page.title}`}>
-            {page.title}
+              {page.title}
             </Link>
           </Menu.Item>)}
 
         {role?.admin && <Menu.Item key="7" icon={<SettingOutlined />} style={{ position: 'absolute', bottom: 40 }}>
-        <Link to="/manage">
-          Manage Content
+          <Link to="/manage">
+            Manage Content
           </Link>
         </Menu.Item>}
         <Menu.Item key="8" disabled icon={<LoginOutlined />} style={{ position: 'absolute', bottom: 0 }}>
           <Button ghost onClick={handleLoginLogout}>
             {user ? <p>Sign out</p> : <p>Sign in</p>}
           </Button>
-          <AuthenticationModal visible={authModalVisible} setVisible={setAuthModalVisible}/>
+          <AuthenticationModal visible={authModalVisible} setVisible={setAuthModalVisible} />
         </Menu.Item>
       </StyledMenu>
     </StyledSider>
