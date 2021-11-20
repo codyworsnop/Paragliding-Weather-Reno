@@ -1,17 +1,19 @@
 import React from 'react';
 import styled from 'styled-components'
-import { Table, Button, Skeleton, Empty, Space, Tag } from 'antd';
+import { Table, Button, Space, Tag } from 'antd';
 import {
     PlusOutlined,
 } from '@ant-design/icons';
 import { Split } from '@bedrock-layout/split';
+import { useHistory } from 'react-router';
 
 const Wrapper = styled.div`
-    margin: 40px;
+    margin: 50px;
 `;
 
 const ManageContent = () => {
 
+    let history = useHistory();
     const fakeData = [
         {
             title: 'jeff goes flying',
@@ -39,13 +41,11 @@ const ManageContent = () => {
         }
     ]
 
-
-
     return (
         <Wrapper>
             <Split fraction='auto-end'>
                 <h1 style={{ fontSize: '1.5em' }}>Content</h1>
-                <Button type='primary' icon={<PlusOutlined />}>Add</Button>
+                <Button type='primary' onClick={() => history.push('/add')} icon={<PlusOutlined />}>Add</Button>
             </Split>
             <Table dataSource={fakeData} columns={[
                 {

@@ -38,7 +38,7 @@ const App = () => {
                                 <Route exact path="/windy" component={Windy} />
                                 <Route exact path="/rasp" component={Rasp} />
                                 <Route exact path="/windObservations" component={WindObservations} />
-                                <AdminRoute exact path="/edit" component={ManageContent} />
+                                <AdminRoute exact path="/manage" component={ManageContent} />
                                 <AdminRoute exact path="/add" component={AddContent} />
                             </Switch>
                         </Content>

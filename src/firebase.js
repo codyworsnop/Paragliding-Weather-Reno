@@ -2,7 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth'
-import { getFirestore } from 'firebase/firestore'
+import { getFirestore, collection, addDoc, getDocs } from 'firebase/firestore'
 import { message } from 'antd'
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -25,10 +25,25 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const analytics = getAnalytics(app);
+
 const googleProvider = new GoogleAuthProvider()
 
-export const getRoles = () => {
-    
+export const firestoreWriteJson = async (data) => {
+
+    try {
+        const docRef = await addDoc(collection(db, "pages"), data);
+        console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+        console.error("Error adding document: ", e);
+    }
+}
+
+export const firestoreRead = async () => {
+    const querySnapshot = await getDocs(collection(db, "pages"));
+    querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`);
+        console.log(doc.data())
+    });
 }
 
 export const signInWithEmail = async (email, password) => {

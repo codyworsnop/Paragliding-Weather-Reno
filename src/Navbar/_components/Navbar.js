@@ -90,7 +90,7 @@ const Navbar = () => {
           </Link>
         </Menu.Item> */}
         {role?.admin && <Menu.Item key="7" icon={<PlusOutlined />} style={{ position: 'absolute', bottom: 40 }}>
-        <Link to="/edit">
+        <Link to="/manage">
           Add Content
           </Link>
         </Menu.Item>}
