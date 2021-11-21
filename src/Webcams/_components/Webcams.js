@@ -1,41 +1,64 @@
-import { Card, Col, Row } from 'antd';
 import React from 'react'
+import { Card, Col, Row } from 'antd';
 import styled from 'styled-components'
-import DashboardItem from '../../Dashboard/_components/DashboardItem';
 
 const Container = styled(Row)`
     padding: 20px;
+    height: 100%;
 `;
 
-// todo: fix the issue where width needs to be 100% with height of 400px; 
+// oof this was hard to figure out
+// https://www.w3schools.com/howto/howto_css_aspect_ratio.asp
 const Webcam = styled.iframe`
+
     width: 100%;
-    height: 420px;
+    height: 100%;
+    position: absolute;
     border: none;
-    overflow: hidden;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 `;
 
-const Webcams = () => { 
-    return (
+const StyledCard = styled(Card)`
+    border-radius: 4px;
+    box-shadow: 0 3px 5px rgb(0 0 0 / 0.2);
 
+    .ant-card-body {
+        padding-top: 56.25%; /* 16:9 aspect ratio */
+        position: relative;
+        width: 100%;
+    }
+`;
+
+const Webcams = () => {
+    return (
         <Container gutter={[16, 16]}>
             <Col xs={24} sm={12}>
-                <DashboardItem title="Slide Bowl" link="https://skirose.com/the-mountain-web-cams/" content={
-                    <Webcam src={'https://live3.brownrice.com/embed/mtroseslidebowl'} />} />
+                <StyledCard title="Slide Bowl" extra={<a href={"https://skirose.com/the-mountain-web-cams/"}>More</a>}>
+                    <Webcam src={'https://live3.brownrice.com/embed/mtroseslidebowl'} />
+                </StyledCard>
             </Col>
             <Col xs={24} sm={12}>
-                <DashboardItem title="Mt Rose Summit" link="https://skirose.com/the-mountain-web-cams/" content={
-                    <Webcam src={'https://live3.brownrice.com/embed/mtrosesummit'} />} />
+                <StyledCard title="Mt Rose Summit" extra={<a href={"https://skirose.com/the-mountain-web-cams/"}>More</a>}>
+                    <Webcam src={'https://live3.brownrice.com/embed/mtrosesummit'} />
+                </StyledCard>
             </Col>
             <Col xs={24} sm={12}>
-                <DashboardItem title="West Shore Cafe" link="https://www.youtube.com/watch?v=thHgzWlveqs&feature=emb_title" content={
-                    <Webcam src={'https://www.youtube.com/embed/thHgzWlveqs'} />} />
+                <StyledCard title="West Shore Cafe" extra={<a href={"https://www.youtube.com/watch?v=thHgzWlveqs&feature=emb_title"}>More</a>}>
+                    <Webcam src={'https://www.youtube.com/embed/thHgzWlveqs'} />
+                </StyledCard>
             </Col>
             <Col xs={24} sm={12}>
-                <DashboardItem title="North Tahoe Event Center" link="https://tahoetopia.com/webcam/north-tahoe-event-center-kings-beach" content={<Webcam src={'https://portal.hdontap.com/s/embed/?stream=northtahoepud_ttv-TOPIA'} />} />
+                <StyledCard title="North Tahoe Event Center" extra={<a href={"https://tahoetopia.com/webcam/north-tahoe-event-center-kings-beach"}>More</a>}>
+                    <Webcam src={'https://portal.hdontap.com/s/embed/?stream=northtahoepud_ttv-TOPIA'} />
+                </StyledCard>
             </Col>
             <Col xs={24} sm={12}>
-                <DashboardItem title="Kings Beach Pier" link="https://tahoetopia.com/webcam/kings-beach-north-tahoe-watersports-cam" content={<Webcam src={'https://portal.hdontap.com/s/embed/?stream=kingsbeach_ttv-TOPIA'} />} />
+                <StyledCard title="Kings Beach Pier" extra={<a href={"https://tahoetopia.com/webcam/kings-beach-north-tahoe-watersports-cam"}>More</a>}>
+                    <Webcam src={'https://portal.hdontap.com/s/embed/?stream=kingsbeach_ttv-TOPIA'} />
+                </StyledCard>
             </Col>
         </Container>
     )

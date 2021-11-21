@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Divider, Layout, Menu } from 'antd';
+import { Button, Layout, Menu } from 'antd';
 import {
   FireOutlined,
   DashboardOutlined,
@@ -48,7 +48,7 @@ const Navbar = () => {
 
   useEffect(() => {
     dispatch(firestoreReadJson())
-  }, [])
+  }, [dispatch])
 
   const onCollapse = () => {
     setCollapsed(!collapsed)
@@ -89,14 +89,14 @@ const Navbar = () => {
         </Menu.Item>
         <Menu.Item key="5" icon={<VideoCameraOutlined />}>
           <Link to="/webcams">
-            Webcams
+          Webcams
           </Link>
         </Menu.Item>
 
         {/* Dynamic Content */}
         {pages?.map(page => page.enabled &&
           <Menu.Item key={page.title}>
-            <Link to={`/${page.title}`}>
+            <Link to={`/${page.pathname}`}>
               {page.title}
             </Link>
           </Menu.Item>)}

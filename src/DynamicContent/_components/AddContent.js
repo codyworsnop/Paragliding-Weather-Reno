@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import 'react-markdown-editor-lite/lib/index.css';
 import { Button, Checkbox, Form, Input, Spin } from 'antd';
@@ -28,19 +28,25 @@ const AddContent = () => {
     }))
 
     const onFinish = (values) => {
-        const request = {
-            ...values,
-            author: user?.displayName,
-            createdDate: Date.now(),
-            updateDate: null,
-        }
 
         if (edit) { 
-            dispatch(firestoreUpdate({ ...request, id: data.id })).then(() => {
+            const request = {
+                ...data,
+                ...values,
+                updatedDate: Date.now(),
+            }
+
+            dispatch(firestoreUpdate(request)).then(() => {
                 form.resetFields();
                 history.push('/manage')
             })
         } else {
+            const request = {
+                ...values,
+                author: user?.displayName,
+                createdDate: Date.now()
+            }
+
             dispatch(firestoreWriteJson(request)).then(() => {
                 form.resetFields();
                 history.push('/manage')

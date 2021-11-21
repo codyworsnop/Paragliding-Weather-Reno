@@ -2,7 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth'
-import { getFirestore, collection, addDoc, getDocs } from 'firebase/firestore'
+import { getFirestore } from 'firebase/firestore'
 import { message } from 'antd'
 
 // TODO: Add SDKs for Firebase products that you want to use

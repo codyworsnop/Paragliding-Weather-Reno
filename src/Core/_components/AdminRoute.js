@@ -15,8 +15,7 @@ const Centered = styled.div`
 const AdminRoute = (props) => {
     const location = useLocation();
     const [bypassRole, setBypassRule] = useState(true)
-    const { user, role, loading } = useSelector(({ authReducer }) => ({
-        user: authReducer.user,
+    const { role } = useSelector(({ authReducer }) => ({
         role: authReducer.role
     }))
 
@@ -24,7 +23,7 @@ const AdminRoute = (props) => {
 
         // This is just a hack. There's a race condition between the page loading and the auth claims loading. If they haven't loaded within
         // two seconds then we'll just assume they'll never load. Routing between normal page navigation works fine so probably don't need to address this.
-        const timer = setTimeout(() => {
+        setTimeout(() => {
             setBypassRule(false)
         }, 5000)
     }, [])

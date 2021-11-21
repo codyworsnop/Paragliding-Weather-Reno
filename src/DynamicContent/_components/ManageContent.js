@@ -26,7 +26,7 @@ const ManageContent = () => {
 
     useEffect(() => {
         dispatch(firestoreReadJson())
-    }, [])
+    }, [dispatch])
 
     return (
         <Wrapper>
@@ -47,12 +47,12 @@ const ManageContent = () => {
                     {
                         title: 'Created Date',
                         dataIndex: 'createdDate',
-                        render: value => (new Date(value).toString())
+                        render: value => (value ? new Date(value).toString() : '--')
                     },
                     {
                         title: 'Last Updated',
                         dataIndex: 'updatedDate',
-                        render: value => (new Date(value).toString())
+                        render: value => (value ? new Date(value).toString() : '--')
                     },
                     {
                         title: 'Active',

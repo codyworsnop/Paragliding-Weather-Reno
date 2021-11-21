@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Layout } from 'antd';
 import {
     BrowserRouter as Router,
@@ -51,7 +51,7 @@ const App = () => {
                         <br></br>
                         <br></br>
 
-                        The objective of this website is to provide pilots, local and non-local, with weather information about the Reno Tahoe Regional area.
+                        The objective of this website is to provide pilots with weather information about the Reno Tahoe Regional area.
                         The information contained in this website is not maintained by the site, and is not guaranteed to be accurate, timely, or sound.
                         None of the information given here is owned by paraglidingweatherreno.com, as these are merely links to various official sources such as the National Weather Service in Reno.
                         Paragliding is an inherently dangerous sport. Nothing in this site should be construed as encouragement or endorsement of you, the pilot, engaging in the activity of Paragliding.

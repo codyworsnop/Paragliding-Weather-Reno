@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { getIdTokenResult } from '@firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useDispatch } from 'react-redux'
 import { auth } from '../../firebase'
@@ -13,7 +12,7 @@ const Authentication = () => {
             dispatch(setUser(user))
             dispatch(setUserClaims(user))
         }
-    }, [user, loading, error])
+    }, [user, loading, error, dispatch])
 
     return (
         <></>

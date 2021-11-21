@@ -4,7 +4,7 @@ import { Redirect, Route } from 'react-router'
 import DynamicContentContainer from '../../DynamicContent/_components/DynamicContentContainer'
 
 const DynamicRoutes = () => {
-    const { pages, loading } = useSelector(({ contentReducer }) => ({
+    const { pages } = useSelector(({ contentReducer }) => ({
         pages: contentReducer.pages,
         loading: contentReducer.loading,
     }))
