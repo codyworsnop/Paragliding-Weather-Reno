@@ -50,7 +50,7 @@ const Webcams = () => {
                     <Webcam src={'https://www.youtube.com/embed/thHgzWlveqs'} />
                 </StyledCard>
             </Col>
-            <Col xs={24} sm={12}>
+            {/* <Col xs={24} sm={12}>
                 <StyledCard title="North Tahoe Event Center" extra={<a href={"https://tahoetopia.com/webcam/north-tahoe-event-center-kings-beach"}>More</a>}>
                     <Webcam src={'https://portal.hdontap.com/s/embed/?stream=northtahoepud_ttv-TOPIA'} />
                 </StyledCard>
@@ -59,7 +59,7 @@ const Webcams = () => {
                 <StyledCard title="Kings Beach Pier" extra={<a href={"https://tahoetopia.com/webcam/kings-beach-north-tahoe-watersports-cam"}>More</a>}>
                     <Webcam src={'https://portal.hdontap.com/s/embed/?stream=kingsbeach_ttv-TOPIA'} />
                 </StyledCard>
-            </Col>
+            </Col> */}
         </Container>
     )
 }
