@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Layout, Menu } from 'antd';
 import {
   FireOutlined,
@@ -6,14 +6,18 @@ import {
   CloudOutlined,
   RadarChartOutlined,
   LoginOutlined,
+  SettingOutlined,
+  VideoCameraOutlined
 } from '@ant-design/icons';
 import {
   Link
 } from "react-router-dom";
 import styled from 'styled-components';
-import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth, logout } from '../../firebase'
+import { logout } from '../../firebase'
 import AuthenticationModal from '../../Login/_components/AuthenticationModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { logOut } from '../../Core/_actions/authActions';
+import { firestoreReadJson } from '../../Core/_actions/FirebaseActions';
 
 const { Sider } = Layout;
 const StyledSider = styled(Sider)`
@@ -32,9 +36,19 @@ const StyledMenu = styled(Menu)`
 `;
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(false)
   const [authModalVisible, setAuthModalVisible] = useState(false)
-  const [user] = useAuthState(auth) //[user, loading, error]
+  const { user, role, pages } = useSelector(({ authReducer, contentReducer }) => ({
+    user: authReducer.user,
+    role: authReducer.role,
+    pages: contentReducer.pages,
+    loading: contentReducer.loading,
+  }))
+
+  useEffect(() => {
+    dispatch(firestoreReadJson())
+  }, [dispatch])
 
   const onCollapse = () => {
     setCollapsed(!collapsed)
@@ -43,6 +57,7 @@ const Navbar = () => {
   const handleLoginLogout = () => {
     if (user) {
       logout()
+      dispatch(logOut())
     } else {
       setAuthModalVisible(true)
     }
@@ -72,24 +87,30 @@ const Navbar = () => {
             Wind Observations
           </Link>
         </Menu.Item>
-        {/* <Menu.Item key="5" icon={<VideoCameraOutlined />}>
+        <Menu.Item key="5" icon={<VideoCameraOutlined />}>
           <Link to="/webcams">
-            Webcams
+          Webcams
           </Link>
-        </Menu.Item> */}
-        {/* <Menu.Item key="6" icon={<BookOutlined />}>
-          <Link to="/blog">
-            Blog
+        </Menu.Item>
+
+        {/* Dynamic Content */}
+        {pages?.map(page => page.enabled &&
+          <Menu.Item key={page.title}>
+            <Link to={`/${page.pathname}`}>
+              {page.title}
+            </Link>
+          </Menu.Item>)}
+
+        {role?.admin && <Menu.Item key="7" icon={<SettingOutlined />} style={{ position: 'absolute', bottom: 40 }}>
+          <Link to="/manage">
+            Manage Content
           </Link>
-        </Menu.Item> */}
-        {/* {user && <Menu.Item key="7" icon={<PlusOutlined />} style={{ position: 'absolute', bottom: 40 }}>
-          Add Content
-        </Menu.Item>} */}
+        </Menu.Item>}
         <Menu.Item key="8" disabled icon={<LoginOutlined />} style={{ position: 'absolute', bottom: 0 }}>
           <Button ghost onClick={handleLoginLogout}>
             {user ? <p>Sign out</p> : <p>Sign in</p>}
           </Button>
-          <AuthenticationModal visible={authModalVisible} setVisible={setAuthModalVisible}/>
+          <AuthenticationModal visible={authModalVisible} setVisible={setAuthModalVisible} />
         </Menu.Item>
       </StyledMenu>
     </StyledSider>

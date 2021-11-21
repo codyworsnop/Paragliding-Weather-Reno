@@ -1,7 +1,7 @@
 import { logEvent, setCurrentScreen } from '@firebase/analytics';
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router';
-import { analytics } from './firebase';
+import { analytics } from '../../firebase';
 
 const Analytics = () => {
 
