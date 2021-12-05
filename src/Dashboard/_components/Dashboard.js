@@ -66,6 +66,14 @@ const Dashboard = () => {
                     <p style={{ fontSize: '1.5em' }}>See additional <a href="https://rucsoundings.noaa.gov/">Interactive RUC Soundings here</a></p>
                     </>}/>
             </Col>
+            <Col xs={24} sm={12}>
+                <DashboardItem
+                    title="Basic Soundings"
+                    link="https://topaflyers.com/weather/soundings"
+                    content={<FitImage src="https://topaflyers.com/weather/soundings/rev.png"/>}/>
+            </Col>
+
+            
             {/* https://www.wrh.noaa.gov/images/rev/remote/pvpn2T.png */}
             {/* <Col xs={24} sm={12}>
                 <DashboardItem
