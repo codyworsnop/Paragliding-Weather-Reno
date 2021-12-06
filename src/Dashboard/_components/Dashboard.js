@@ -64,7 +64,7 @@ const Dashboard = () => {
                     extraContent={
                     <>
                         <br></br>
-                        <p style={{ fontSize: '1.5em' }}>See additional <a target={"_blank"} href="https://rucsoundings.noaa.gov/">Interactive RUC Soundings here</a></p>
+                        <p style={{ fontSize: '1.5em' }}>See additional <a rel="noreferrer" target={"_blank"} href="https://rucsoundings.noaa.gov/">Interactive RUC Soundings here</a></p>
                     </>
                     }/>
             </Col>
