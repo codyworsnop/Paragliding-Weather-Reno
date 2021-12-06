@@ -21,7 +21,7 @@ const ContentWrapper = styled.div`
     cursor: pointer;
 `;
 
-const DashboardItem = ({ title, dynamic, content, link, dynamicConfig }) => {
+const DashboardItem = ({ title, dynamic, content, link, dynamicConfig, extraContent }) => {
 
     const dispatch = useDispatch()
 
@@ -58,6 +58,7 @@ const DashboardItem = ({ title, dynamic, content, link, dynamicConfig }) => {
                     </pre>
                 </StyledSpinner>
             </ContentWrapper>
+            {extraContent}
         </StyledCard>
     )
 }

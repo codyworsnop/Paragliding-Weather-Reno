@@ -60,11 +60,13 @@ const Dashboard = () => {
                 <DashboardItem
                     title="Soundings"
                     link="https://www.spc.noaa.gov/exper/soundings/"
-                    content={<>
-                    <FitImage src={GetSoundingsDateLink()} alt=""/>
-                    <br></br>
-                    <p style={{ fontSize: '1.5em' }}>See additional <a href="https://rucsoundings.noaa.gov/">Interactive RUC Soundings here</a></p>
-                    </>}/>
+                    content={<FitImage src={GetSoundingsDateLink()} alt=""/>}
+                    extraContent={
+                    <>
+                        <br></br>
+                        <p style={{ fontSize: '1.5em' }}>See additional <a target={"_blank"} href="https://rucsoundings.noaa.gov/">Interactive RUC Soundings here</a></p>
+                    </>
+                    }/>
             </Col>
             <Col xs={24} sm={12}>
                 <DashboardItem
