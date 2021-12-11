@@ -1,12 +1,11 @@
 const functions = require("firebase-functions");
 const cors = require('cors')({ origin: true });
-const puppeteer = require('puppeteer')
 const cheerio = require('cheerio');
 const fetch = require('node-fetch');
 
 exports.collectSource = functions.https.onRequest(async (request, response) => {
     cors(request, response, async () => {
-
+        response.set('Cache-Control', 'public, max-age=10800, s-maxage=10800');
         const url = request.body.url
         const res = await fetch(url);
         const html = await res.text();
