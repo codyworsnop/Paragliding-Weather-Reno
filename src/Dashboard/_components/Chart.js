@@ -11,9 +11,7 @@ const Chart = () => {
     }))
 
     useEffect(() => {
-
-            dispatch(getObservations())
-
+        dispatch(getObservations())
     }, [dispatch, observations]);
 
 
@@ -26,8 +24,6 @@ const Chart = () => {
 
     pressureObservations.sort((a, b) => a.timestamp - b.timestamp)
 
-    console.log(pressureObservations)
-    
     return (
         <div style={{ height: '500px', marginLeft: '-25px' }}>
             <ResponsiveContainer width="100%" height="100%">
@@ -41,13 +37,13 @@ const Chart = () => {
                         left: 30,
                         bottom: 5,
                     }}
-                    >
+                >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="timestamp" hide />
-                    <YAxis domain={['auto', 'auto']}/>
+                    <YAxis domain={['auto', 'auto']} />
                     <Tooltip />
                     <Legend />
-                    
+
                     <Line type="monotone" dataKey="barometricPressure" stroke="#82ca9d" />
                 </LineChart>
             </ResponsiveContainer>
