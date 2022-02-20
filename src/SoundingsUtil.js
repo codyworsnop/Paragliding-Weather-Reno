@@ -19,6 +19,6 @@ export const GetSoundingsDateLink = () => {
         day = "0" + day
     }
     
-    // console.log( baseLink + year + month + day + time + extension)
+    console.log( baseLink + year + month + day + time + extension)
     return baseLink + year + month + day + time + extension
 }

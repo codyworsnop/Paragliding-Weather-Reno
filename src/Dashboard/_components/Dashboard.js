@@ -3,6 +3,7 @@ import { Row, Col } from 'antd'
 import styled from 'styled-components'
 import DashboardItem from './DashboardItem'
 import { GetSoundingsDateLink } from '../../SoundingsUtil';
+import Chart from '../_components/Chart'
 
 const Container = styled(Row)`
     padding: 20px;
@@ -73,6 +74,12 @@ const Dashboard = () => {
                     title="Basic Soundings"
                     link="https://topaflyers.com/weather/soundings"
                     content={<FitImage src="https://topaflyers.com/weather/soundings/rev.png"/>}/>
+            </Col>
+            <Col xs={24} sm={12}>
+                <DashboardItem
+                    title="Barometric Pressure"
+                    link=""
+                    content={<Chart />}/>
             </Col>
 
             

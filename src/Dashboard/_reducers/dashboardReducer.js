@@ -1,5 +1,5 @@
 import typeToReducer from 'type-to-reducer'
-import { GET_SCRAPER_DATA } from '../_actions/DashboardActions'
+import { GET_SCRAPER_DATA, GET_OBSERVATIONS } from '../_actions/DashboardActions'
 
 const initialState = {}
 
@@ -24,5 +24,23 @@ export const dashboardReducer = typeToReducer({
 
             return update
         },
+    },
+    [GET_OBSERVATIONS]: {
+        PENDING: (state, action) => {
+            return {
+                ...state,
+            }
+        },
+        REJECTED: (state, action) => {
+            return { 
+                ...state
+            }
+        },
+        FULFILLED: (state, action) => {
+            return {
+                ...state,
+                observations: action.payload.data.features
+            }
+        }
     }
 }, initialState)
