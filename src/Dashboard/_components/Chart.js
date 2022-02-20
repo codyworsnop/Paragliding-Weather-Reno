@@ -22,7 +22,7 @@ const Chart = () => {
         }
     })
 
-    pressureObservations.sort((a, b) => a.timestamp - b.timestamp)
+    pressureObservations?.sort((a, b) => a.timestamp - b.timestamp)
 
     return (
         <div style={{ height: '500px', marginLeft: '-25px' }}>
