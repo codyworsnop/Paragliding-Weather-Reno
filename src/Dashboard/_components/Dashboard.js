@@ -78,7 +78,7 @@ const Dashboard = () => {
             <Col xs={24} sm={12}>
                 <DashboardItem
                     title="Barometric Pressure"
-                    link=""
+                    disableLink
                     content={<Chart />}/>
             </Col>
 

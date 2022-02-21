@@ -21,7 +21,7 @@ const ContentWrapper = styled.div`
     cursor: pointer;
 `;
 
-const DashboardItem = ({ title, dynamic, content, link, dynamicConfig, extraContent }) => {
+const DashboardItem = ({ title, dynamic, content, link, dynamicConfig, extraContent, disableLink }) => {
 
     const dispatch = useDispatch()
 
@@ -50,8 +50,8 @@ const DashboardItem = ({ title, dynamic, content, link, dynamicConfig, extraCont
     }
 
     return (
-        <StyledCard title={title} extra={<a href={link}>More</a>}>
-            <ContentWrapper onClick={openAsNewPage}>
+        <StyledCard title={title} extra={!disableLink && <a href={link}>More</a>}>
+            <ContentWrapper onClick={!disableLink && openAsNewPage}>
                 <StyledSpinner spinning={dynamic ? loading : false}>
                     <pre style={{ fontSize: "0.8vmax" }}>
                         {dynamic ? data : content}
@@ -67,13 +67,15 @@ DashboardItem.propTypes = {
     title: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
     content: PropTypes.any,
-    dynamicConfig: PropTypes.object
+    dynamicConfig: PropTypes.object,
+    disableLink: PropTypes.bool
 };
 
 DashboardItem.defaultProps = {
     dynamic: false,
     content: "Not available. Please see more.",
-    dynamicConfig: null
+    dynamicConfig: null,
+    disableLink: false,
 }
 
 export default DashboardItem
