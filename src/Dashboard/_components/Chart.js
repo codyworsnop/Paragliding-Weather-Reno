@@ -25,6 +25,17 @@ const Chart = () => {
 
     pressureObservations?.sort((a, b) => a.timestamp - b.timestamp)
 
+    //filter out outliers using interquartile range (not quite...filtering out top 5% / bottom 5%)
+    if (pressureObservations) {
+        var dataValues = [...pressureObservations].map(obs => obs.barometricPressure)
+        dataValues?.sort(obs => obs)
+
+        var bottom = dataValues[ parseInt((5 * dataValues.length) / 100)]
+        var top = dataValues[ parseInt((95 * dataValues.length) / 100)]
+
+        pressureObservations = pressureObservations?.filter(obs => obs.barometricPressure > bottom && obs.barometricPressure < top)
+    }
+
     return (
         <div style={{ height: '500px' }}>
             Current Pressure: {pressureObservations?.length > 0 ? pressureObservations[pressureObservations.length - 1].barometricPressure : ""}
