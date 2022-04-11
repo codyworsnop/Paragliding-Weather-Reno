@@ -28,13 +28,20 @@ const Chart = () => {
     //filter out outliers using interquartile range (not quite...filtering out top 5% / bottom 5%)
     if (pressureObservations) {
         var dataValues = [...pressureObservations].map(obs => obs.barometricPressure)
-        dataValues?.sort(obs => obs)
+        dataValues?.sort((a, b) => a-b)
 
         var bottom = dataValues[ parseInt((5 * dataValues.length) / 100)]
         var top = dataValues[ parseInt((95 * dataValues.length) / 100)]
 
+        console.log(dataValues)
+        console.log("length: " + dataValues.length)
+        console.log("BOTTOM: " + bottom)
+        console.log("TOP: " + top)
+
         pressureObservations = pressureObservations?.filter(obs => obs.barometricPressure > bottom && obs.barometricPressure < top)
     }
+
+    console.log(pressureObservations)
 
     return (
         <div style={{ height: '500px' }}>
