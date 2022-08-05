@@ -1,5 +1,5 @@
 import { React, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { getObservations } from "../_actions/DashboardActions";
 
@@ -8,11 +8,11 @@ const Chart = () => {
     const dispatch = useDispatch();
     const { observations } = useSelector(({ dashboardReducer }) => ({
         observations: dashboardReducer.observations
-    }))
+    }), shallowEqual)
 
     useEffect(() => {
         dispatch(getObservations())
-    }, [dispatch, observations]);
+    }, [dispatch]);
 
 
     pressureObservations = observations?.map(obs => {
@@ -33,15 +33,8 @@ const Chart = () => {
         var bottom = dataValues[ parseInt((5 * dataValues.length) / 100)]
         var top = dataValues[ parseInt((95 * dataValues.length) / 100)]
 
-        console.log(dataValues)
-        console.log("length: " + dataValues.length)
-        console.log("BOTTOM: " + bottom)
-        console.log("TOP: " + top)
-
         pressureObservations = pressureObservations?.filter(obs => obs.barometricPressure > bottom && obs.barometricPressure < top)
     }
-
-    console.log(pressureObservations)
 
     return (
         <div style={{ height: '500px' }}>

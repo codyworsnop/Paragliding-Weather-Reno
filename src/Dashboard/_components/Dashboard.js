@@ -1,9 +1,12 @@
-import React from 'react'
+import { React, useEffect } from 'react'
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { Row, Col } from 'antd'
 import styled from 'styled-components'
 import DashboardItem from './DashboardItem'
 import { GetSoundingsDateLink } from '../../SoundingsUtil';
 import Chart from '../_components/Chart'
+import { getProduct, getProducts } from "../_actions/DashboardActions";
+import { getScraperData } from '../_actions/DashboardActions'
 
 const Container = styled(Row)`
     padding: 20px;
@@ -14,8 +17,30 @@ const FitImage = styled.img`
     height: auto;
 `;
 
+const fetchScraperData = (link, key, tag) => 
+    getScraperData(link, key, tag)
+
 const Dashboard = () => {
 
+    const dispatch = useDispatch();
+    const { products, product } = useSelector(({ dashboardReducer }) => ({
+        products: dashboardReducer.products,
+        product: dashboardReducer.product
+    }), shallowEqual)
+
+    useEffect(() => {
+        dispatch(getProducts())
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (products) { 
+            const productId = products.sort((a, b) => a.issuanceTime - b.issuanceTime)[0].id
+            if (productId) {
+                dispatch(getProduct(productId))
+            }
+        }
+    }, [dispatch, products])
+    
     return (
         <Container gutter={[16, 16]}>
             <Col xs={24} sm={12}>
@@ -23,6 +48,7 @@ const Dashboard = () => {
                     dynamic={true}
                     dynamicConfig={{
                         reducerKey: "area-forecast",
+                        fetch: fetchScraperData,
                         link: "https://forecast.weather.gov/product.php?site=REV&issuedby=REV&product=AFD&format=CI&version=1&glossary=1",
                         tag: "pre"
                     }}
@@ -32,14 +58,9 @@ const Dashboard = () => {
 
             <Col xs={24} sm={12}>
                 <DashboardItem
-                    dynamic={true}
                     title="Soaring Guidance"
-                    dynamicConfig={{
-                        reducerKey: "soaring-guidance",
-                        link: "https://www.wrh.noaa.gov/total_forecast/getprod.php?wfo=rev&sid=rev&pil=srg",
-                        tag: "pre"
-                    }}
-                    link="https://www.wrh.noaa.gov/total_forecast/getprod.php?wfo=rev&sid=rev&pil=srg" />
+                    link="https://www.weather.gov/wrh/TextProduct?product=srgrev"
+                    content={product?.productText} />
             </Col>
 
             <Col xs={24} sm={12}>

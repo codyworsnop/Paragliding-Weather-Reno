@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Card, Spin } from 'antd'
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux';
-import { getScraperData } from '../_actions/DashboardActions'
 
 const StyledCard = styled(Card)`
     width: 100%;
@@ -22,9 +21,7 @@ const ContentWrapper = styled.div`
 `;
 
 const DashboardItem = ({ title, dynamic, content, link, dynamicConfig, extraContent, disableLink }) => {
-
     const dispatch = useDispatch()
-
     const { loading, data } = useSelector(({ dashboardReducer }) => {
         if (dynamic) {
             return {
@@ -33,28 +30,44 @@ const DashboardItem = ({ title, dynamic, content, link, dynamicConfig, extraCont
             }
         } else {
             return {
-                loading: false,
+                loading: content ? false : true,
                 data: null
             }
         }
     })
 
+    const loadingRef = useRef(loading)
+    var [displayableContent, setDisplayableContent] = useState(dynamic ? data : content)
+
+    useEffect(() => {
+        setDisplayableContent(dynamic ? data : content)
+        loadingRef.current = loading
+    }, [data, content, dynamic, loading])
+
+    useEffect(() => {
+        setTimeout(() => {
+            if (loadingRef.current) {
+                setDisplayableContent("Not available. Please see more." )
+            }
+        }, 10000)
+    }, [])
+
     useEffect(() => {
         if (dynamic) {
-            dispatch(getScraperData(dynamicConfig.link, dynamicConfig.reducerKey, dynamicConfig.tag))
+            dispatch(dynamicConfig.fetch(dynamicConfig.link, dynamicConfig.reducerKey, dynamicConfig.tag))
         }
-    }, [dynamicConfig, dispatch, dynamic])
+    }, [dispatch, dynamicConfig, dynamic])
 
     const openAsNewPage = () => {
         window.open(link, '_blank').focus();
     }
-
+    
     return (
         <StyledCard title={title} extra={!disableLink && <a href={link}>More</a>}>
-            <ContentWrapper onClick={!disableLink && openAsNewPage}>
-                <StyledSpinner spinning={dynamic ? loading : false}>
+            <ContentWrapper onClick={() => { return !disableLink && openAsNewPage}}>
+                <StyledSpinner spinning={loading && !displayableContent}>
                     <pre style={{ fontSize: "0.8vmax" }}>
-                        {dynamic ? data : content}
+                        {displayableContent}
                     </pre>
                 </StyledSpinner>
             </ContentWrapper>
@@ -65,7 +78,7 @@ const DashboardItem = ({ title, dynamic, content, link, dynamicConfig, extraCont
 
 DashboardItem.propTypes = {
     title: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
+    link: PropTypes.string,
     content: PropTypes.any,
     dynamicConfig: PropTypes.object,
     disableLink: PropTypes.bool
@@ -73,7 +86,7 @@ DashboardItem.propTypes = {
 
 DashboardItem.defaultProps = {
     dynamic: false,
-    content: "Not available. Please see more.",
+    content: null,
     dynamicConfig: null,
     disableLink: false,
 }
