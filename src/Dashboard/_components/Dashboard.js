@@ -4,7 +4,8 @@ import { Row, Col } from 'antd'
 import styled from 'styled-components'
 import DashboardItem from './DashboardItem'
 import { GetSoundingsDateLink } from '../../SoundingsUtil';
-import Chart from '../_components/Chart'
+import Chart from './Chart'
+import Forecast from './Forecast';
 import { getProduct, getProducts } from "../_actions/DashboardActions";
 import { getScraperData } from '../_actions/DashboardActions'
 
@@ -43,6 +44,13 @@ const Dashboard = () => {
     
     return (
         <Container gutter={[16, 16]}>
+            <Col xs={24} sm={24}>
+                <DashboardItem
+                    title="Forecast"
+                    link="https://forecast.weather.gov/MapClick.php?lat=39.5296329&lon=-119.8138027&site=all&smap=1&searchresult=Reno%2C%20NV%2C%20USA#.Y0nNhxZlAWM"
+                    content={<Forecast /> } />
+            </Col>
+            
             <Col xs={24} sm={12}>
                 <DashboardItem
                     dynamic={true}
