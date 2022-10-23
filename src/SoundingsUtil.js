@@ -1,6 +1,6 @@
 export const GetSoundingsDateLink = () => {
     const baseLink = "https://www.spc.noaa.gov/exper/soundings/"
-    const extension = "_OBS/REV.gif"
+    const extension = "_OBS/last.gif"
     const date = new Date() //21091312
     const year = date.getUTCFullYear().toString().substr(-2)
     let month = (date.getUTCMonth() + 1).toString()
