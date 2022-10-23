@@ -112,12 +112,11 @@ const Dashboard = () => {
             </Col>
             <Col xs={24} sm={12}>
                 <DashboardItem
-                    title="Basic Soundings"
-                    link="https://topaflyers.com/weather/soundings"
+                    title="Hourly Graphical Forecast"
+                    link="https://forecast.weather.gov/MapClick.php?lat=39.5296&lon=-119.8138&unit=0&lg=english&FcstType=graphical"
                     content={<FitImage src="https://forecast.weather.gov/meteograms/Plotter.php?lat=39.5296&lon=-119.8138&wfo=REV&zcode=NVZ003&gset=18&gdiff=8&unit=0&tinfo=PY8&ahour=0&pcmd=11011111111110100000000000000000000000000000000000000000000&lg=en&indu=1!1!1!&dd=&bw=&hrspan=48&pqpfhr=6&psnwhr=6"/>}/>
             </Col>
 
-            
             {/* https://www.wrh.noaa.gov/images/rev/remote/pvpn2T.png */}
             {/* <Col xs={24} sm={12}>
                 <DashboardItem
