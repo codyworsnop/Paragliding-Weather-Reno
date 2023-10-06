@@ -19,13 +19,13 @@ const StyledStack = styled.div`
 const ForecastItem = ({ forecast }) => {
 
     return <StyledStack>
-        <p>{moment.unix(forecast.dt).format('dddd')} {forecast.timeDescriptor}</p>
-        <img src={`https://openweathermap.org/img/wn/${forecast.icon}@2x.png`} style={{ width: "50px", margin: "auto" }} alt="forecast" />
+        <p>{forecast.name}</p>
+        <img src={forecast.icon} style={{ width: "50px", margin: "auto" }} alt="forecast" />
         <Split fraction='auto-end'>
-            <p>{forecast.description}</p>
+            <p>{forecast.shortForecast}</p>
             <div style={{ display: "flex", flexDirection: "row" }}>
                 <Divider type='vertical' />
-                <p>{parseInt(forecast.max)}/{parseInt(forecast.min)}F</p>
+                {/* <p>{parseInt(forecast.max)}/{parseInt(forecast.min)}F</p> */}
             </div>
         </Split>
     </StyledStack>
