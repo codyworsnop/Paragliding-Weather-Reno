@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getForecast } from '../_actions/DashboardActions';
 import ForecastItem from './ForecastItem';
 import styled from 'styled-components'
-import _ from 'lodash';
 import { Split } from '@bedrock-layout/split';
 
 const Container = styled.div`

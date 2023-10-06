@@ -1,6 +1,5 @@
 import { Split } from '@bedrock-layout/split';
 import { Divider } from 'antd';
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
