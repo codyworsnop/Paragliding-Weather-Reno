@@ -17,14 +17,16 @@ const StyledStack = styled.div`
 
 const ForecastItem = ({ forecast }) => {
 
-    return <StyledStack>
+    return <StyledStack style={{ margin: '15px' }}>
         <p>{forecast.name}</p>
-        <img src={forecast.icon} style={{ width: "50px", margin: "auto" }} alt="forecast" />
-        <Split fraction='auto-end'>
+        <img src={forecast.icon} style={{ width: "40px", margin: "auto" }} alt="forecast" />
+        <Split fraction='auto-end' >
             <p>{forecast.shortForecast}</p>
+            <Divider type='horizontal' />
             <div style={{ display: "flex", flexDirection: "row" }}>
+                <p>{forecast.temperature} {forecast.temperatureUnit}</p>
                 <Divider type='vertical' />
-                {/* <p>{parseInt(forecast.max)}/{parseInt(forecast.min)}F</p> */}
+                <p>{forecast.windSpeed}</p>
             </div>
         </Split>
     </StyledStack>

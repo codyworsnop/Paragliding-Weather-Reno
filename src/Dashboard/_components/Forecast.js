@@ -24,8 +24,8 @@ const Forecast = () => {
     return <Container>
         {
             forecast && forecast.properties.periods.map(forecast =>
-                <Split key={forecast.dt}>
-                    <ForecastItem forecast={forecast} key={forecast.dt} />
+                <Split key={forecast.number} gutter='size1'>
+                    <ForecastItem  forecast={forecast} />
                 </Split>
             )
         }
