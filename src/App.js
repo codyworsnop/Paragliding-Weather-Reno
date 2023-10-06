@@ -21,6 +21,8 @@ import DynamicRoutes from './Core/_components/DynamicRoutes';
 import Webcams from './Webcams/_components/Webcams';
 import AppFooter from './AppFooter';
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
 const { Content } = Layout;
 
 const App = () => {
