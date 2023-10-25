@@ -19,7 +19,7 @@ const ForecastItem = ({ forecast }) => {
 
     return <StyledStack style={{ margin: '15px' }}>
         <p>{forecast.name}</p>
-        <img src={forecast.icon} style={{ width: "40px", margin: "auto" }} alt="forecast" />
+        <img src={forecast.icon} style={{ width: "80px", margin: "auto" }} alt="forecast" />
         <Split fraction='auto-end' >
             <p>{forecast.shortForecast}</p>
             <Divider type='horizontal' />
