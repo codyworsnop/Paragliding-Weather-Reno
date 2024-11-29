@@ -7,7 +7,8 @@ import {
   RadarChartOutlined,
   LoginOutlined,
   SettingOutlined,
-  VideoCameraOutlined
+  VideoCameraOutlined,
+  SendOutlined
 } from '@ant-design/icons';
 import {
   Link
@@ -89,9 +90,16 @@ const Navbar = () => {
         </Menu.Item>
         <Menu.Item key="5" icon={<VideoCameraOutlined />}>
           <Link to="/webcams">
-          Webcams
+            Webcams
           </Link>
         </Menu.Item>
+        <Menu.SubMenu key="6" icon={<SendOutlined />} title='Sites'>
+          <Menu.Item key="6.1">
+            <Link to="/sites/hallelujah">
+              Hallelujah
+            </Link>
+          </Menu.Item>
+        </Menu.SubMenu>
 
         {/* Dynamic Content */}
         {pages?.map(page => page.enabled &&
