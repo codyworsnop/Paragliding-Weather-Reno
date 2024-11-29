@@ -19,6 +19,7 @@ import AddContent from './DynamicContent/_components/AddContent';
 import AdminRoute from './Core/_components/AdminRoute';
 import DynamicRoutes from './Core/_components/DynamicRoutes';
 import Webcams from './Webcams/_components/Webcams';
+import SiteHallelujah from './sites/SiteHallelujah';
 import AppFooter from './AppFooter';
 
 const { Content } = Layout;
@@ -41,6 +42,7 @@ const App = () => {
                                 <Route exact path="/rasp" component={Rasp} />
                                 <Route exact path="/windObservations" component={WindObservations} />
                                 <Route exact path="/webcams" component={Webcams} />
+                                <Route exact path="/sites/hallelujah" component={SiteHallelujah} />
                                 <AdminRoute exact path="/manage" component={ManageContent} />
                                 <AdminRoute exact path="/add" component={AddContent} />
                                 <DynamicRoutes />
