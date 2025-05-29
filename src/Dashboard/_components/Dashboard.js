@@ -72,9 +72,6 @@ const Dashboard = () => {
             </Col>
 
             <Col xs={24} sm={12}>
-                <DashboardItem title="Virginia Peak" link="https://www.wrh.noaa.gov/rev/remotedata/" content={<FitImage src="https://www.wrh.noaa.gov/images/rev/remote/rgxW.png" alt="" />} />
-            </Col>
-            <Col xs={24} sm={12}>
                 <DashboardItem title="DRI Slide Wind" link="https://wrcc.dri.edu/weather/slide.html" content={<FitImage src="https://wrcc.dri.edu/cgi-bin/g2sage.pl?slid" alt="" />} />
             </Col>
             <Col xs={24} sm={12}>
